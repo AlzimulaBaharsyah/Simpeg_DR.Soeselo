@@ -70,22 +70,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($penghargaans as $key => $penghargaan)
-                            <tr>
-                                <td class="text-center">{{ $penghargaans->firstItem() + $key }}</td>
-                                <td>
-                                    {{ $penghargaan->pegawai->nip }} - {{ $penghargaan->pegawai->nama_lengkap }}
-                                </td>
-                                <td>{{ $penghargaan->nama }}</td>
-                                <td>{{ $penghargaan->pemberi }}</td>
-                                <td>{{ \Carbon\Carbon::parse($penghargaan->tanggal_penghargaan)->translatedFormat('d F Y') }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ route('pegawai.show', $penghargaan->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#penghargaan')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
-                                    </div>
-                                </td>
-                            </tr>                                
-                            @endforeach
+                            @if($penghargaans->isEmpty())
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">Data penghargaan tidak ditemukan.</td>
+                                </tr>                                
+                            @else
+                                @foreach ($penghargaans as $key => $penghargaan)
+                                <tr>
+                                    <td class="text-center">{{ $penghargaans->firstItem() + $key }}</td>
+                                    <td>
+                                        {{ $penghargaan->pegawai->nip }} - {{ $penghargaan->pegawai->nama_lengkap }}
+                                    </td>
+                                    <td>{{ $penghargaan->nama }}</td>
+                                    <td>{{ $penghargaan->pemberi }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($penghargaan->tanggal_penghargaan)->translatedFormat('d F Y') }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('pegawai.show', $penghargaan->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#penghargaan')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                     <!-- Pagination -->

@@ -198,7 +198,7 @@
                     allowClear: true
                 },
                 '#nama_jabatan': {
-                    placeholder: "RSUD dr. Soeselo Slawi",
+                    placeholder: "-- Pilihan --",
                     allowClear: true
                 },
                 '#pangkat': {

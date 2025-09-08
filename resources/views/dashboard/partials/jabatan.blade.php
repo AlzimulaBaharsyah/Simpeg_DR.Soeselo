@@ -1,5 +1,29 @@
 <!-- Jabatan create -->
 <div class="view mt-1">
+    @php
+        use Carbon\Carbon;
+
+        if (!function_exists('uiDate')) {
+            function uiDate($value) {
+                if (empty($value)) return '';
+                try {
+                    // Kalau dari DB (Y-m-d) → ke d-m-Y
+                    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+                        return Carbon::createFromFormat('Y-m-d', $value)->format('d-m-Y');
+                    }
+                    // Kalau sudah d-m-Y (old input), biarin
+                    if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $value)) {
+                        return $value;
+                    }
+                    // Fallback: coba parse bebas
+                    return Carbon::parse($value)->format('d-m-Y');
+                } catch (\Exception $e) {
+                    return $value; // jangan bikin form blank kalau gagal parse
+                }
+            }
+        }
+    @endphp
+
     {{-- Periksa apakah sedang dalam mode edit atau create --}}
     @isset($jabatan) {{-- Jika variabel $jabatan ada, berarti mode edit --}}
         <form action="{{ route('jabatan.update', $jabatan->id) }}" method="POST">
@@ -26,10 +50,10 @@
                     <option value="" selected disabled>RSUD dr Soeselo Slawi</option>
                     @php
                         $unitKerjaOptions = [
-                            'Direktur RSUD dr Soeselo', 'Direktur Pelayanan', 'Direktur Umum dan Keuangan',
+                            'RSUD Dr. Soeselo Slawi', 'Direktur Pelayanan', 'Direktur Umum dan Keuangan',
                             'Bidang Pelayanan Medis', 'Bidang Pelayanan Keperawatan', 'Bidang Pelayanan Penunjang',
                             'Bagian Tata Usaha', 'Bagian Keuangan', 'Bagian Perencanaan',
-                            'Subbagian Umum', 'Subbagian Kepegawaian'
+                            'Sub Bagian Umum', 'Subbagian Kepegawaian'
                         ];
                     @endphp
                     @foreach ($unitKerjaOptions as $option)
@@ -181,7 +205,7 @@
                 <select class="form-select" aria-label="Default select example" name="jenis_jabatan" id="jenis_jabatan" required>
                     <option value="" selected disabled>-- Pilihan --</option>
                     @php
-                        $jenisJabatanOptions = ['Struktural', 'Fungsional', 'Fungsional Pelaksana', 'Tenaga Ahli Daya', 'Tenaga Mitra'];
+                        $jenisJabatanOptions = ['Struktural', 'Fungsional Tertentu', 'Fungsional Pelaksana', 'Tenaga Ahli Daya', 'Tenaga Mitra'];
                     @endphp
                     @foreach ($jenisJabatanOptions as $option)
                         <option value="{{ $option }}" {{ old('jenis_jabatan', $jabatan->jenis_jabatan ?? '') == $option ? 'selected': '' }} >{{ $option }}</option>
@@ -263,7 +287,7 @@
             <label for="tmt_golongan_ruang" class="col-md-4 col-lg-3 col-form-label">TMT Golongan Ruang</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_golongan_ruang" type="text" class="form-control @error('tmt_golongan_ruang') is-invalid @enderror" id="tmt_golongan_ruang" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_golongan_ruang', $jabatan->tmt_golongan_ruang ?? '') }}">
+                    <input name="tmt_golongan_ruang" type="text" class="form-control @error('tmt_golongan_ruang') is-invalid @enderror" id="tmt_golongan_ruang" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_golongan_ruang', $jabatan->tmt_golongan_ruang ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_golongan_ruang" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_golongan_ruang')
@@ -300,7 +324,7 @@
             <label for="tmt_golongan_ruang_cpns" class="col-md-4 col-lg-3 col-form-label">TMT Golongan Ruang CPNS</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_golongan_ruang_cpns" type="text" class="form-control @error('tmt_golongan_ruang_cpns') is-invalid @enderror" id="tmt_golongan_ruang_cpns" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_golongan_ruang_cpns', $jabatan->tmt_golongan_ruang_cpns ?? '') }}">
+                    <input name="tmt_golongan_ruang_cpns" type="text" class="form-control @error('tmt_golongan_ruang_cpns') is-invalid @enderror" id="tmt_golongan_ruang_cpns" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_golongan_ruang_cpns', $jabatan->tmt_golongan_ruang_cpns ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_golongan_ruang_cpns" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_golongan_ruang_cpns')
@@ -310,7 +334,7 @@
             <label for="tmt_pns" class="col-md-4 col-lg-3 col-form-label">TMT PNS</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_pns" type="text" class="form-control @error('tmt_pns') is-invalid @enderror" id="tmt_pns" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_pns', $jabatan->tmt_pns ?? '') }}">
+                    <input name="tmt_pns" type="text" class="form-control @error('tmt_pns') is-invalid @enderror" id="tmt_pns" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_pns', $jabatan->tmt_pns ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_pns" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_pns')
@@ -345,7 +369,7 @@
             <label for="tgl_sk_pengangkatan_blud" class="col-md-4 col-lg-3 col-form-label">Tanggal SK Pengangkatan Pegawai BLUD</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tgl_sk_pengangkatan_blud" type="text" class="form-control @error('tgl_sk_pengangkatan_blud') is-invalid @enderror" id="tgl_sk_pengangkatan_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tgl_sk_pengangkatan_blud', $jabatan->tgl_sk_pengangkatan_blud ?? '') }}">
+                    <input name="tgl_sk_pengangkatan_blud" type="text" class="form-control @error('tgl_sk_pengangkatan_blud') is-invalid @enderror" id="tgl_sk_pengangkatan_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tgl_sk_pengangkatan_blud', $jabatan->tgl_sk_pengangkatan_blud ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tgl_sk_pengangkatan_blud" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                 @error('tgl_sk_pengangkatan_blud')
@@ -365,7 +389,7 @@
             <label for="tgl_mou_awal_blud" class="col-md-4 col-lg-3 col-form-label">Tanggal MOU Awal Pegawai BLUD</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tgl_mou_awal_blud" type="text" class="form-control @error('tgl_mou_awal_blud') is-invalid @enderror" id="tgl_mou_awal_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tgl_mou_awal_blud', $jabatan->tgl_mou_awal_blud ?? '') }}">
+                    <input name="tgl_mou_awal_blud" type="text" class="form-control @error('tgl_mou_awal_blud') is-invalid @enderror" id="tgl_mou_awal_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tgl_mou_awal_blud', $jabatan->tgl_mou_awal_blud ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tgl_mou_awal_blud" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tgl_mou_awal_blud')
@@ -378,7 +402,7 @@
             <label for="tmt_awal_mou_blud" class="col-md-4 col-lg-3 col-form-label">TMT Awal MOU BLUD</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_awal_mou_blud" type="text" class="form-control @error('tmt_awal_mou_blud') is-invalid @enderror" id="tmt_awal_mou_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_awal_mou_blud', $jabatan->tmt_awal_mou_blud ?? '') }}">
+                    <input name="tmt_awal_mou_blud" type="text" class="form-control @error('tmt_awal_mou_blud') is-invalid @enderror" id="tmt_awal_mou_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_awal_mou_blud', $jabatan->tmt_awal_mou_blud ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_awal_mou_blud" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_awal_mou_blud')
@@ -388,7 +412,7 @@
             <label for="tmt_akhir_mou_blud" class="col-md-4 col-lg-3 col-form-label">S/D TMT Akhir Mou BLUD</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_akhir_mou_blud" type="text" class="form-control @error('tmt_akhir_mou_blud') is-invalid @enderror" id="tmt_akhir_mou_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_akhir_mou_blud', $jabatan->tmt_akhir_mou_blud ?? '') }}">
+                    <input name="tmt_akhir_mou_blud" type="text" class="form-control @error('tmt_akhir_mou_blud') is-invalid @enderror" id="tmt_akhir_mou_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_akhir_mou_blud', $jabatan->tmt_akhir_mou_blud ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_akhir_mou_blud" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_akhir_mou_blud')
@@ -408,7 +432,7 @@
             <label for="tgl_akhir_blud" class="col-md-4 col-lg-3 col-form-label">Tanggal Akhir Pegawai BLUD</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tgl_akhir_blud" type="text" class="form-control @error('tgl_akhir_blud') is-invalid @enderror" id="tgl_akhir_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tgl_akhir_blud', $jabatan->tgl_akhir_blud ?? '') }}">
+                    <input name="tgl_akhir_blud" type="text" class="form-control @error('tgl_akhir_blud') is-invalid @enderror" id="tgl_akhir_blud" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tgl_akhir_blud', $jabatan->tgl_akhir_blud ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tgl_akhir_blud" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tgl_akhir_blud')
@@ -421,7 +445,7 @@
             <label for="tmt_mou_akhir" class="col-md-4 col-lg-3 col-form-label">TMT MOU Akhir</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_mou_akhir" type="text" class="form-control @error('tmt_mou_akhir') is-invalid @enderror" id="tmt_mou_akhir" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_mou_akhir', $jabatan->tmt_mou_akhir ?? '') }}">
+                    <input name="tmt_mou_akhir" type="text" class="form-control @error('tmt_mou_akhir') is-invalid @enderror" id="tmt_mou_akhir" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_mou_akhir', $jabatan->tmt_mou_akhir ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_mou_akhir" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_mou_akhir')
@@ -431,7 +455,7 @@
             <label for="tmt_akhir_mou" class="col-md-4 col-lg-3 col-form-label">S/D TMT Akhir MOU</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_akhir_mou" type="text" class="form-control @error('tmt_akhir_mou') is-invalid @enderror" id="tmt_akhir_mou" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_akhir_mou', $jabatan->tmt_akhir_mou ?? '') }}">
+                    <input name="tmt_akhir_mou" type="text" class="form-control @error('tmt_akhir_mou') is-invalid @enderror" id="tmt_akhir_mou" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_akhir_mou', $jabatan->tmt_akhir_mou ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_akhir_mou" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_akhir_mou')
@@ -451,7 +475,7 @@
             <label for="tgl_mou_mitra" class="col-md-4 col-lg-3 col-form-label">Tanggal MOU Pegawai Mitra</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tgl_mou_mitra" type="text" class="form-control @error('tgl_mou_mitra') is-invalid @enderror" id="tgl_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tgl_mou_mitra', $jabatan->tgl_mou_mitra ?? '') }}">
+                    <input name="tgl_mou_mitra" type="text" class="form-control @error('tgl_mou_mitra') is-invalid @enderror" id="tgl_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tgl_mou_mitra', $jabatan->tgl_mou_mitra ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tgl_mou_mitra" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tgl_mou_mitra')
@@ -464,7 +488,7 @@
             <label for="tmt_mou_mitra" class="col-md-4 col-lg-3 col-form-label">TMT MOU Mitra</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_mou_mitra" type="text" class="form-control @error('tmt_mou_mitra') is-invalid @enderror" id="tmt_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_mou_mitra', $jabatan->tmt_mou_mitra ?? '') }}">
+                    <input name="tmt_mou_mitra" type="text" class="form-control @error('tmt_mou_mitra') is-invalid @enderror" id="tmt_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_mou_mitra', $jabatan->tmt_mou_mitra ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_mou_mitra" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_mou_mitra')
@@ -474,7 +498,7 @@
             <label for="tmt_akhir_mou_mitra" class="col-md-4 col-lg-3 col-form-label">S/D TMT Akhir MOU Mitra</label>
             <div class="col-md-4 col-lg-3">
                 <div class="input-group">
-                    <input name="tmt_akhir_mou_mitra" type="text" class="form-control @error('tmt_akhir_mou_mitra') is-invalid @enderror" id="tmt_akhir_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('tmt_akhir_mou_mitra', $jabatan->tmt_akhir_mou_mitra ?? '') }}">
+                    <input name="tmt_akhir_mou_mitra" type="text" class="form-control @error('tmt_akhir_mou_mitra') is-invalid @enderror" id="tmt_akhir_mou_mitra" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_akhir_mou_mitra', $jabatan->tmt_akhir_mou_mitra ?? '')) }}">
                     <button class="btn btn-outline-secondary" type="button" for="tmt_akhir_mou_mitra" id="button-addon2"><i class="bi bi-calendar3"></i></button>
                 </div>
                     @error('tmt_akhir_mou_mitra')

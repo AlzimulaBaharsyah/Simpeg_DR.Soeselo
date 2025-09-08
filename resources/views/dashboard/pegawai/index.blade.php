@@ -42,7 +42,7 @@
                 
                         <!-- Jenis Kepegawaian -->
                         <div style="min-width: 180px;">
-                            <select name="jenis_kepegawaian" class="form-select" onchange="this.form.submit()">
+                            <select name="jenis_kepegawaian" class="form-select" id="jenis_kepegawaian" onchange="this.form.submit()">
                                 <option value="">-- Pilihan --</option>
                                 @foreach($jeniskepegawaianList as $jenis)
                                     <option value="{{ $jenis }}" {{ request('jenis_kepegawaian') == $jenis ? 'selected' : '' }}>
@@ -54,7 +54,7 @@
 
                         <!-- Unit Kerja -->
                         <div style="min-width: 250px;">
-                            <select name="nama_jabatan" class="form-select" onchange="this.form.submit()">
+                            <select name="nama_jabatan" class="form-select" id="nama_jabatan" onchange="this.form.submit()">
                                 <option value="">-- Pilihan --</option>
                                 @foreach($namajabatanList as $jabatan)
                                     <option value="{{ $jabatan }}" {{ request('nama_jabatan') == $jabatan ? 'selected' : '' }}>
@@ -63,11 +63,11 @@
                                 @endforeach
                             </select>
                         </div>
-                
+
                         <!-- Search -->
                         <div class="col-12 col-md-4">
                             <div class="input-group">
-                                <input type="search" name="search" id="search" class="form-control" value="{{ request('search') }}">
+                                <input type="search" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari pegawai..." aria-label="Search pegawai">
                                 <button type="submit" class="btn btn-outline-primary">
                                     <i class="bi bi-search"></i> search
                                 </button>

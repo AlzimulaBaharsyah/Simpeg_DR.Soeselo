@@ -72,24 +72,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($istris as $key => $istri)
-                            <tr>
-                                <td class="text-center">{{ $istris->firstItem() + $key }}</td>
-                                <td>
-                                    {{ $istri->pegawai->nip }} - {{ $istri->pegawai->nama_lengkap }}
-                                </td>
-                                <td>{{ $istri->nama }}</td>
-                                <td>{{ $istri->tempat_lahir }}, {{ \Carbon\Carbon::parse($istri->tanggal_lahir_istri)->translatedFormat('d F Y') }}</td>
-                                <td>{{ $istri->profesi }}</td>
-                                <td>{{ \Carbon\Carbon::parse($istri->tanggal_nikah)->translatedFormat('d F Y') }}</td>
-                                <td>{{ $istri->status_hubungan }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                    <a href="{{ route('pegawai.show', $istri->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#suami-istri')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
-                                    </div>
-                                </td>
-                            </tr>                                
-                            @endforeach
+                            @if($istris->isEmpty())
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted">Data istri tidak ditemukan.</td>
+                                </tr>
+                            @else
+                                @foreach ($istris as $key => $istri)
+                                <tr>
+                                    <td class="text-center">{{ $istris->firstItem() + $key }}</td>
+                                    <td>
+                                        {{ $istri->pegawai->nip }} - {{ $istri->pegawai->nama_lengkap }}
+                                    </td>
+                                    <td>{{ $istri->nama }}</td>
+                                    <td>{{ $istri->tempat_lahir }}, {{ \Carbon\Carbon::parse($istri->tanggal_lahir_istri)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ $istri->profesi }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($istri->tanggal_nikah)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ $istri->status_hubungan }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                        <a href="{{ route('pegawai.show', $istri->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#suami-istri')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>                            
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                     <!-- Pagination -->

@@ -79,7 +79,7 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        // melakukan validasi data
+        // validasi data
         $validatedData = $request->validate([
             'image' => 'nullable|file|max:5120|mimes:jpg,jpeg,png,gif,bmp',
             'nip' => 'required',
@@ -118,7 +118,7 @@ class PegawaiController extends Controller
             $validatedData['image'] = $request->file('image')->store('foto-profile', 'public');
         }
 
-        // Simpan ke database dan simpan ID-nya
+        // Simpan ke database
         $pegawai = Pegawai::create($validatedData);
 
         // Redirect ke halaman show pegawai
@@ -130,8 +130,10 @@ class PegawaiController extends Controller
      */
     public function show(Pegawai $pegawai, Request $request)
     {
+        // load relasi jabatan
         $pegawai->load('jabatan');
 
+        // Ambil data jabatan
         $jabatan = $pegawai->jabatan;
 
         return view('dashboard.partials.show', compact('pegawai', 'jabatan'));
@@ -194,6 +196,7 @@ class PegawaiController extends Controller
             $validatedData['image'] = $request->file('image')->store('foto-profile', 'public');
         }
 
+        // Update ke database pegawai
         $pegawai->update($validatedData);
 
         return redirect()->route('pegawai.show', $pegawai->id)->with('success', 'Berhasil Memperbarui Pegawai');
@@ -204,10 +207,11 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
+        // Hapus image jika ada
         if ( $pegawai->image ) {
             Storage::delete($pegawai->image);
         }
-        $pegawai->delete();
+        $pegawai->delete();// hapus data pegawai
 
         return redirect('/dashboard/pegawai')->with('success','Data Pegawai Berhasil Dihapus' );
     }
@@ -286,8 +290,10 @@ class PegawaiController extends Controller
 
     public function getData($id)
     {
+        // Mengambil data pegawai beserta relasi jabatan dan pendidikan
         $pegawai = Pegawai::with('jabatan', 'pendidikans')->findOrFail($id);
 
+        // mengambil data yang diperlukan
         return response()->json([
             'nip' => $pegawai->nip ?? '-',
             'tempat_lahir' =>$pegawai->tempat_lahir ?? '-',
@@ -305,33 +311,40 @@ class PegawaiController extends Controller
 
     public function rekapKGBPangkat(Request $request)
     {
+        // Ambil semua data pegawai
         $now = Carbon::now();
         $pegawais = Pegawai::all();
 
+        // Inisialisasi koleksi untuk KGB dan Pangkat
         $dataKGB = collect();
         $dataPangkat = collect();
 
+        // Hitung KGB dan Pangkat
         foreach ($pegawais as $pegawai) {
             $tmt = $pegawai->tmt_golongan_ruang ?? $pegawai->tmt_golongan_ruang_cpns;
-            if (!$tmt) continue;
+            if (!$tmt) continue;// lewati jika tmt kosong
 
-            $mk = Carbon::parse($tmt)->diffInYears($now);
-            $kgbKe = floor($mk / 2);
-            $tmtKgbTerakhir = Carbon::parse($tmt)->addYears($kgbKe * 2);
+            $masakerja = Carbon::parse($tmt)->diffInYears($now);// hitung masa kerja dalam tahun
+            $kgbKe = floor($masakerja / 2);// hitung KGB ke berapa
+            $tmtKgbTerakhir = Carbon::parse($tmt)->addYears($kgbKe * 2);// hitung tmt KGB terakhir
 
+            // Cek apakah KGB berikutnya sudah jatuh tempo, jika ya maka masukkan ke dataKGB
             if ($tmtKgbTerakhir->lte($now)) {
                 $dataKGB->push($pegawai);
             }
 
-            if ($mk >= 4) {
+            // Cek apakah Pangkat berikutnya sudah jatuh tempo, jika ya maka masukkan ke dataPangkat
+            if ($masakerja >= 4) {
                 $dataPangkat->push($pegawai);
             }
         }
 
+        // Pagination untuk KGB dan Pangkat
         $perPage = 10;
         $currentPageKgb = LengthAwarePaginator::resolveCurrentPage('kgb_page');
         $currentPagePangkat = LengthAwarePaginator::resolveCurrentPage('pangkat_page');
 
+        // Pagination KGB
         $kgbPaginated = new LengthAwarePaginator(
             $dataKGB->forPage($currentPageKgb, $perPage),
             $dataKGB->count(),
@@ -340,6 +353,7 @@ class PegawaiController extends Controller
             ['path' => url()->current(), 'pageName' => 'kgb_page']
         );
 
+        // Pagination Pangkat
         $pangkatPaginated = new LengthAwarePaginator(
             $dataPangkat->forPage($currentPagePangkat, $perPage),
             $dataPangkat->count(),

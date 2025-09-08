@@ -72,24 +72,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anaks as $key => $anak)
-                            <tr>
-                                <td class="text-center">{{ $anaks->firstItem() + $key }}</td>
-                                <td>
-                                    {{ $anak->pegawai->nip }} - {{ $anak->pegawai->nama_lengkap }}
-                                </td>
-                                <td>{{ $anak->nama }}</td>
-                                <td>{{ $anak->tempat_lahir }}, {{ \Carbon\Carbon::parse($anak->tanggal_lahir_anak)->translatedFormat('d F Y') }}</td>
-                                <td>{{ $anak->status_keluarga }}</td>
-                                <td>{{ $anak->status_tunjangan }}</td>
-                                <td>{{ $anak->jenis_kelamin }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ route('pegawai.show', $anak->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#anak')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
-                                    </div>
-                                </td>
-                            </tr>                                
-                            @endforeach
+                            @if ($anaks->isEmpty())
+                                <tr>
+                                    <td colspan="8" class="text-center">Data anak tidak ditemukan.</td>
+                                </tr>
+                            @else
+                                @foreach ($anaks as $key => $anak)
+                                <tr>
+                                    <td class="text-center">{{ $anaks->firstItem() + $key }}</td>
+                                    <td>
+                                        {{ $anak->pegawai->nip }} - {{ $anak->pegawai->nama_lengkap }}
+                                    </td>
+                                    <td>{{ $anak->nama }}</td>
+                                    <td>{{ $anak->tempat_lahir }}, {{ \Carbon\Carbon::parse($anak->tanggal_lahir_anak)->translatedFormat('d F Y') }}</td>
+                                    <td>{{ $anak->status_keluarga }}</td>
+                                    <td>{{ $anak->status_tunjangan }}</td>
+                                    <td>{{ $anak->jenis_kelamin }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('pegawai.show', $anak->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#anak')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                     <!-- Pagination -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'pegawai_id' => 'required|exists:pegawais,id',
             'skpd'=>'required',
             'unit_kerja'=>'required',
@@ -67,30 +68,52 @@ class JabatanController extends Controller
             'status'=>'required',
             'pangkat'=>'nullable',
             'golongan_ruang'=>'nullable',
-            'tmt_golongan_ruang'=>'nullable',
+            'tmt_golongan_ruang'=>'nullable|date_format:d-m-Y',
             'golongan_ruang_cpns'=>'nullable',
-            'tmt_golongan_ruang_cpns'=>'nullable',
-            'tmt_pns'=>'nullable',
+            'tmt_golongan_ruang_cpns'=>'nullable|date_format:d-m-Y',
+            'tmt_pns'=>'nullable|date_format:d-m-Y',
             'eselon'=>'nullable',
             'sk_pengangkatan_blud'=>'nullable',
-            'tgl_sk_pengangkatan_blud'=>'nullable|date',
+            'tgl_sk_pengangkatan_blud'=>'nullable|date_format:d-m-Y',
             'mou_awal_blud'=>'nullable',
-            'tgl_mou_awal_blud'=>'nullable|date',
-            'tmt_awal_mou_blud'=>'nullable|date',
-            'tmt_akhir_mou_blud'=>'nullable|date',
+            'tgl_mou_awal_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_awal_mou_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou_blud'=>'nullable|date_format:d-m-Y',
             'mou_akhir_blud'=>'nullable',
-            'tgl_akhir_blud'=>'nullable|date',
-            'tmt_mou_akhir'=>'nullable|date',
-            'tmt_akhir_mou'=>'nullable|date',
+            'tgl_akhir_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_mou_akhir'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou'=>'nullable|date_format:d-m-Y',
             'no_mou_mitra'=>'nullable',
-            'tgl_mou_mitra'=>'nullable|date',
-            'tmt_mou_mitra'=>'nullable|date',
-            'tmt_akhir_mou_mitra'=>'nullable|date',
+            'tgl_mou_mitra'=>'nullable|date_format:d-m-Y',
+            'tmt_mou_mitra'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou_mitra'=>'nullable|date_format:d-m-Y',
         ]);
 
-        Jabatan::create($request->all());
-        return redirect()->back()
-        ->with('success', 'Jabatan Berhasil Ditambahkan');
+        // --- Konversi semua format tanggal sebelum disimpan ---
+        $dateFields = [
+            'tmt_golongan_ruang',
+            'tmt_golongan_ruang_cpns',
+            'tmt_pns',
+            'tgl_sk_pengangkatan_blud',
+            'tgl_mou_awal_blud',
+            'tmt_awal_mou_blud',
+            'tmt_akhir_mou_blud',
+            'tgl_akhir_blud',
+            'tmt_mou_akhir',
+            'tmt_akhir_mou',
+            'tgl_mou_mitra',
+            'tmt_mou_mitra',
+            'tmt_akhir_mou_mitra',
+        ];
+
+        foreach ($dateFields as $field) {
+            if (!empty($validatedData[$field])) {
+                $validatedData[$field] = Carbon::createFromFormat('d-m-Y',$validatedData[$field])->format('Y-m-d');
+            }
+        }
+
+        Jabatan::create($validatedData);
+        return redirect()->back()->with('success', 'Jabatan Berhasil Ditambahkan');
     }
 
     /**
@@ -116,7 +139,7 @@ class JabatanController extends Controller
      */
     public function update(Request $request, Jabatan $jabatan)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'pegawai_id' => 'required|exists:pegawais,id',
             'skpd'=>'required',
             'unit_kerja'=>'required',
@@ -129,30 +152,52 @@ class JabatanController extends Controller
             'status'=>'required',
             'pangkat'=>'nullable',
             'golongan_ruang'=>'nullable',
-            'tmt_golongan_ruang'=>'nullable',
+            'tmt_golongan_ruang'=>'nullable|date_format:d-m-Y',
             'golongan_ruang_cpns'=>'nullable',
-            'tmt_golongan_ruang_cpns'=>'nullable',
-            'tmt_pns'=>'nullable',
+            'tmt_golongan_ruang_cpns'=>'nullable|date_format:d-m-Y',
+            'tmt_pns'=>'nullable|date_format:d-m-Y',
             'eselon'=>'nullable',
             'sk_pengangkatan_blud'=>'nullable',
-            'tgl_sk_pengangkatan_blud'=>'nullable|date',
+            'tgl_sk_pengangkatan_blud'=>'nullable|date_format:d-m-Y',
             'mou_awal_blud'=>'nullable',
-            'tgl_mou_awal_blud'=>'nullable|date',
-            'tmt_awal_mou_blud'=>'nullable|date',
-            'tmt_akhir_mou_blud'=>'nullable|date',
+            'tgl_mou_awal_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_awal_mou_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou_blud'=>'nullable|date_format:d-m-Y',
             'mou_akhir_blud'=>'nullable',
-            'tgl_akhir_blud'=>'nullable|date',
-            'tmt_mou_akhir'=>'nullable|date',
-            'tmt_akhir_mou'=>'nullable|date',
+            'tgl_akhir_blud'=>'nullable|date_format:d-m-Y',
+            'tmt_mou_akhir'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou'=>'nullable|date_format:d-m-Y',
             'no_mou_mitra'=>'nullable',
-            'tgl_mou_mitra'=>'nullable|date',
-            'tmt_mou_mitra'=>'nullable|date',
-            'tmt_akhir_mou_mitra'=>'nullable|date',
+            'tgl_mou_mitra'=>'nullable|date_format:d-m-Y',
+            'tmt_mou_mitra'=>'nullable|date_format:d-m-Y',
+            'tmt_akhir_mou_mitra'=>'nullable|date_format:d-m-Y',
         ]);
 
-        $jabatan->update($request->all());
-        return redirect()->back()
-        ->with('success', 'Jabatan Berhasil Diperbarui');
+        // --- Konversi semua format tanggal sebelum disimpan ---
+        $dateFields = [
+            'tmt_golongan_ruang',
+            'tmt_golongan_ruang_cpns',
+            'tmt_pns',
+            'tgl_sk_pengangkatan_blud',
+            'tgl_mou_awal_blud',
+            'tmt_awal_mou_blud',
+            'tmt_akhir_mou_blud',
+            'tgl_akhir_blud',
+            'tmt_mou_akhir',
+            'tmt_akhir_mou',
+            'tgl_mou_mitra',
+            'tmt_mou_mitra',
+            'tmt_akhir_mou_mitra',
+        ];
+
+        foreach ($dateFields as $field) {
+            if (!empty($validatedData[$field])) {
+                $validatedData[$field] = Carbon::createFromFormat('d-m-Y',$validatedData[$field])->format('Y-m-d');
+            }
+        }
+
+        $jabatan->update($validatedData);
+        return redirect()->back()->with('success', 'Jabatan Berhasil Diperbarui');
     }
 
     /**

@@ -73,25 +73,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($ijinbelajars as $key => $ijinbelajar)
-                            <tr>
-                                <td class="text-center">{{ $ijinbelajars->firstItem() + $key }}</td>
-                                <td>
-                                    {{ $ijinbelajar->pegawai->nip }} - {{ $ijinbelajar->pegawai->nama_lengkap }}
-                                </td>
-                                <td>{{ $ijinbelajar->tingkat_ijin }}</td>
-                                <td>{{ $ijinbelajar->jenis_ijin }}</td>
-                                <td>{{ $ijinbelajar->nama_ijin }}</td>
-                                <td>{{ $ijinbelajar->tahun_lulus_ijin }}</td>
-                                <td>{{ $ijinbelajar->no_ijazah_ijin }}</td>
-                                <td>{{ \Carbon\Carbon::parse($ijinbelajar->tanggal_ijazah)->translatedFormat('d F Y') }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ route('pegawai.show', $ijinbelajar->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#anak')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
-                                    </div>
-                                </td>
-                            </tr>                                
-                            @endforeach
+                            @if($ijinbelajars->isEmpty())
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted">Data ijin belajar tidak ditemukan.</td>
+                                </tr>                                
+                            @else
+                                @foreach ($ijinbelajars as $key => $ijinbelajar)
+                                <tr>
+                                    <td class="text-center">{{ $ijinbelajars->firstItem() + $key }}</td>
+                                    <td>
+                                        {{ $ijinbelajar->pegawai->nip }} - {{ $ijinbelajar->pegawai->nama_lengkap }}
+                                    </td>
+                                    <td>{{ $ijinbelajar->tingkat_ijin }}</td>
+                                    <td>{{ $ijinbelajar->jenis_ijin }}</td>
+                                    <td>{{ $ijinbelajar->nama_ijin }}</td>
+                                    <td>{{ $ijinbelajar->tahun_lulus_ijin }}</td>
+                                    <td>{{ $ijinbelajar->no_ijazah_ijin }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($ijinbelajar->tanggal_ijazah)->translatedFormat('d F Y') }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ route('pegawai.show', $ijinbelajar->pegawai->id) }}" onclick="localStorage.setItem('activePegawaiTab', '#anak')" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i> Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                @endforeach
+                            @endif                            
                         </tbody>
                     </table>
                     <!-- Pagination -->
