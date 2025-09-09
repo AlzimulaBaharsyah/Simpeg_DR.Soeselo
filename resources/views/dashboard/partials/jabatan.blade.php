@@ -356,6 +356,16 @@
                     @endforeach
                 </select>
             </div>
+            <label for="tmt_jabatan" class="col-md-4 col-lg-3 col-form-label">TMT Jabatan</label>
+            <div class="col-md-4 col-lg-3">
+                <div class="input-group">
+                    <input name="tmt_jabatan" type="text" class="form-control @error('tmt_jabatan') is-invalid @enderror" id="tmt_jabatan" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ uiDate(old('tmt_jabatan', $jabatan->tmt_jabatan ?? '')) }}">
+                    <button class="btn btn-outline-secondary" type="button" for="tmt_jabatan" id="button-addon2"><i class="bi bi-calendar3"></i></button>
+                </div>
+                    @error('tmt_jabatan')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
 
         <div class="row mb-3">

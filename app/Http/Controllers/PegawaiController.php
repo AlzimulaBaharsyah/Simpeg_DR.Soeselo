@@ -311,60 +311,81 @@ class PegawaiController extends Controller
 
     public function rekapKGBPangkat(Request $request)
     {
-        // Ambil semua data pegawai
-        $now = Carbon::now();
-        $pegawais = Pegawai::all();
+        $tanggalSekarang = Carbon::now();
 
-        // Inisialisasi koleksi untuk KGB dan Pangkat
-        $dataKGB = collect();
-        $dataPangkat = collect();
+        // Ambil pegawai beserta relasi jabatan (ambil kolom yang diperlukan saja)
+        $daftarPegawai = Pegawai::with(['jabatan' => function ($query) {
+            $query->select(
+                'id', 'pegawai_id',
+                'golongan_ruang', 'tmt_golongan_ruang',
+                'golongan_ruang_cpns', 'tmt_golongan_ruang_cpns',
+                'tmt_jabatan'
+            );
+        }])->get(['id', 'nama']);
 
-        // Hitung KGB dan Pangkat
-        foreach ($pegawais as $pegawai) {
-            $tmt = $pegawai->tmt_golongan_ruang ?? $pegawai->tmt_golongan_ruang_cpns;
-            if (!$tmt) continue;// lewati jika tmt kosong
+        // Kumpulkan pegawai yang masuk kriteria KGB dan Kenaikan Pangkat
+        $koleksiKenaikanGajiBerkala = collect();
+        $koleksiKenaikanPangkat    = collect();
 
-            $masakerja = Carbon::parse($tmt)->diffInYears($now);// hitung masa kerja dalam tahun
-            $kgbKe = floor($masakerja / 2);// hitung KGB ke berapa
-            $tmtKgbTerakhir = Carbon::parse($tmt)->addYears($kgbKe * 2);// hitung tmt KGB terakhir
-
-            // Cek apakah KGB berikutnya sudah jatuh tempo, jika ya maka masukkan ke dataKGB
-            if ($tmtKgbTerakhir->lte($now)) {
-                $dataKGB->push($pegawai);
+        foreach ($daftarPegawai as $pegawai) {
+            $jabatan = $pegawai->jabatan;
+            if (!$jabatan) {
+                continue; // lewati jika belum ada data jabatan
             }
 
-            // Cek apakah Pangkat berikutnya sudah jatuh tempo, jika ya maka masukkan ke dataPangkat
-            if ($masakerja >= 4) {
-                $dataPangkat->push($pegawai);
+            // Prioritaskan TMT golongan, jika kosong gunakan CPNS
+            $tanggalMulaiGolongan = $jabatan->tmt_golongan_ruang ?? $jabatan->tmt_golongan_ruang_cpns;
+            if (!$tanggalMulaiGolongan) {
+                continue; // lewati jika TMT tidak ada
+            }
+
+            // Pastikan bertipe Carbon
+            $tanggalMulaiGolongan = $tanggalMulaiGolongan instanceof Carbon
+                ? $tanggalMulaiGolongan
+                : Carbon::parse($tanggalMulaiGolongan);
+
+            // Hitung masa kerja dalam tahun
+            $masaKerjaTahun = $tanggalMulaiGolongan->diffInYears($tanggalSekarang);
+
+            // KGB setiap 2 tahun sejak TMT golongan
+            $jumlahKenaikanGaji = intdiv($masaKerjaTahun, 2);
+            $tanggalKenaikanGajiTerakhir = (clone $tanggalMulaiGolongan)->addYears($jumlahKenaikanGaji * 2);
+
+            // Masuk daftar KGB jika tanggal KGB terakhir sudah lewat atau sama dengan hari ini
+            if ($tanggalKenaikanGajiTerakhir->lte($tanggalSekarang)) {
+                $koleksiKenaikanGajiBerkala->push($pegawai);
+            }
+
+            // Contoh aturan: Kenaikan pangkat minimal 4 tahun masa kerja
+            if ($masaKerjaTahun >= 4) {
+                $koleksiKenaikanPangkat->push($pegawai);
             }
         }
 
-        // Pagination untuk KGB dan Pangkat
-        $perPage = 10;
-        $currentPageKgb = LengthAwarePaginator::resolveCurrentPage('kgb_page');
-        $currentPagePangkat = LengthAwarePaginator::resolveCurrentPage('pangkat_page');
+        // Pagination terpisah untuk dua tabel
+        $jumlahPerHalaman = 10;
+        $halamanSaatIniKenaikanGajiBerkala = LengthAwarePaginator::resolveCurrentPage('kgb_page');
+        $halamanSaatIniKenaikanPangkat     = LengthAwarePaginator::resolveCurrentPage('pangkat_page');
 
-        // Pagination KGB
-        $kgbPaginated = new LengthAwarePaginator(
-            $dataKGB->forPage($currentPageKgb, $perPage),
-            $dataKGB->count(),
-            $perPage,
-            $currentPageKgb,
+        $paginasiKenaikanGajiBerkala = new LengthAwarePaginator(
+            $koleksiKenaikanGajiBerkala->forPage($halamanSaatIniKenaikanGajiBerkala, $jumlahPerHalaman),
+            $koleksiKenaikanGajiBerkala->count(),
+            $jumlahPerHalaman,
+            $halamanSaatIniKenaikanGajiBerkala,
             ['path' => url()->current(), 'pageName' => 'kgb_page']
         );
 
-        // Pagination Pangkat
-        $pangkatPaginated = new LengthAwarePaginator(
-            $dataPangkat->forPage($currentPagePangkat, $perPage),
-            $dataPangkat->count(),
-            $perPage,
-            $currentPagePangkat,
+        $paginasiKenaikanPangkat = new LengthAwarePaginator(
+            $koleksiKenaikanPangkat->forPage($halamanSaatIniKenaikanPangkat, $jumlahPerHalaman),
+            $koleksiKenaikanPangkat->count(),
+            $jumlahPerHalaman,
+            $halamanSaatIniKenaikanPangkat,
             ['path' => url()->current(), 'pageName' => 'pangkat_page']
         );
 
         return view('dashboard.pegawai.rekap-kgb-pangkat', [
-            'dataKGB' => $kgbPaginated,
-            'dataPangkat' => $pangkatPaginated,
+            'dataKenaikanGajiBerkala' => $paginasiKenaikanGajiBerkala,
+            'dataKenaikanPangkat'     => $paginasiKenaikanPangkat,
         ]);
     }
 }

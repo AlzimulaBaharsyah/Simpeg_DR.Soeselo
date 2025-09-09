@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('formasi_jabatan')->nullable();
             $table->string('formasi_jabatan_tingkat')->nullable();
             $table->string('formasi_jabatan_keterangan')->nullable();
-            $table->string('jenis_kepegawaian');
-            $table->string('jenis_jabatan');
-            $table->string('status');
+            $table->string('jenis_kepegawaian')->nullable();
+            $table->string('jenis_jabatan')->nullable();
+            $table->string('status')->nullable();
             $table->string('pangkat')->nullable();
             $table->string('golongan_ruang')->nullable();
             $table->date('tmt_golongan_ruang')->nullable();

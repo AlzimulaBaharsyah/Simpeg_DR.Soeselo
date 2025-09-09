@@ -24,59 +24,58 @@
             </a>
         </li><!-- End Search Icon-->
 
+        @php
+            $jumlahNotifikasi = count($headerNotifications ?? []);
+        @endphp
+
         <!-- Notification Dropdown Start -->
         <li class="nav-item dropdown">
-            <a class="nav-link nav-icon position-relative" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link nav-icon position-relative" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Buka notifikasi">
                 <i class="bi bi-bell fs-4"></i>
-                @if(count($headerNotifications) > 0)
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{-- First location: Red badge on bell icon --}}
-                        @if(count($headerNotifications) > 99)
-                            99+
-                        @else
-                            {{ count($headerNotifications) }}
-                        @endif
-                        <span class="visually-hidden">unread notifications</span>
+
+                @if($jumlahNotifikasi > 0)
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" aria-label="{{ $jumlahNotifikasi }} notifikasi baru">
+                        {{ $jumlahNotifikasi > 99 ? '99+' : $jumlahNotifikasi }}
+                        <span class="visually-hidden">jumlah notifikasi</span>
                     </span>
                 @endif
             </a>
+
             <div class="dropdown-menu dropdown-menu-end p-0 shadow border-0" style="min-width: 370px; max-width: 400px;">
                 <div class="bg-primary text-white px-4 py-3 rounded-top">
                     <div class="d-flex justify-content-between align-items-center">
                         <span><i class="bi bi-bell-fill me-2 animate__animated animate__tada"></i>Notifikasi</span>
-                        {{-- Second location: Badge in dropdown header --}}
                         <span class="badge bg-light text-primary">
-                            @if(count($headerNotifications) > 99)
-                                99+
-                            @else
-                                {{ count($headerNotifications) }}
-                            @endif
+                            {{ $jumlahNotifikasi > 99 ? '99+' : $jumlahNotifikasi }}
                         </span>
                     </div>
                     <div class="small text-light">Terkait KGB / Kenaikan Pangkat</div>
                 </div>
+
                 <div style="max-height: 400px; overflow-y: auto;">
                     <ul class="list-group list-group-flush">
-                        @forelse ($headerNotifications as $notif)
+                        @forelse ($headerNotifications as $notifikasi)
+                            @php
+                                $jenis = $notifikasi['jenis'] ?? 'LAINNYA';
+                                $isKgb = strtoupper($jenis) === 'KGB';
+                                $isPangkat = strtoupper($jenis) === 'PANGKAT';
+
+                                $badgeClass = $isKgb ? 'bg-info' : ($isPangkat ? 'bg-success' : 'bg-secondary');
+                                $iconClass  = $isKgb ? 'fa-arrow-up' : ($isPangkat ? 'fa-user' : 'fa-info');
+                            @endphp
+
                             <li class="list-group-item notification-item d-flex align-items-start border-0 border-bottom">
                                 <span class="me-3 mt-2">
-                                    <span class="badge
-                                        @if($notif['type'] === 'KGB') bg-info
-                                        @elseif($notif['type'] === 'PANGKAT') bg-success
-                                        @else bg-secondary
-                                        @endif
-                                        p-3 fs-5 shadow-sm">
-                                        <i class="fa
-                                            @if($notif['type'] === 'KGB') fa-arrow-up
-                                            @elseif($notif['type'] === 'PANGKAT') fa-user
-                                            @else fa-info
-                                            @endif"></i>
+                                    <span class="badge {{ $badgeClass }} p-3 fs-5 shadow-sm" title="{{ $jenis }}">
+                                        <i class="fa {{ $iconClass }}"></i>
                                     </span>
                                 </span>
+
                                 <div class="flex-grow-1">
-                                    <div class="fw-semibold mb-1">{{ $notif['nama'] }}</div>
-                                    <div class="text-muted small">{{ $notif['message'] }}</div>
+                                    <div class="fw-semibold mb-1">{{ $notifikasi['nama'] ?? '-' }}</div>
+                                    <div class="text-muted small">{{ $notifikasi['pesan'] ?? '' }}</div>
                                 </div>
+
                                 <span class="text-muted small ms-2 mt-1">{{ now()->format('H:i') }}</span>
                             </li>
                         @empty
@@ -87,6 +86,7 @@
                         @endforelse
                     </ul>
                 </div>
+
                 <div class="py-2 text-center border-top bg-light rounded-bottom">
                     <a href="{{ route('rekap.kgbpangkat') }}" class="fw-bold text-primary text-decoration-none">
                         Lihat Rekap KGB & Pangkat <i class="fa fa-angle-right"></i>

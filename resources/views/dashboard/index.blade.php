@@ -177,62 +177,115 @@
             </div><!-- End Charts -->
         </section>
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                function createChart(chartId, title, categories, data) {
-                    const colors = [
-                        "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#8E44AD", "#16A085", "#E74C3C",
-                        "#2ECC71", "#3498DB", "#D35400", "#C0392B", "#7D3C98", "#27AE60", "#2980B9"
-                    ];
+        document.addEventListener("DOMContentLoaded", () => {
+            function createChart(chartId, title, categories, data) {
+                const colors = [
+                "#FF5733","#33FF57","#3357FF","#F39C12","#8E44AD","#16A085","#E74C3C",
+                "#2ECC71","#3498DB","#D35400","#C0392B","#7D3C98","#27AE60","#2980B9"
+                ];
 
-                    const seriesData = categories.map((category, index) => ({
-                        name: category, 
-                        data: [data[index]],
-                    })).reverse();
+                // zip kategori + nilai
+                let paired = categories.map((name, i) => ({
+                originalName: String(name ?? '').trim(),
+                value: Number(data[i] ?? 0)
+                }));
 
-                    new ApexCharts(document.querySelector(`#${chartId}`), {
-                        chart: { type: 'bar', height: 500, stacked: false },
-                        series: seriesData, 
-                        xaxis: { categories: [title] },
-                        yaxis: { title: { text: 'Jumlah' } },
-                        plotOptions: { bar: { horizontal: false, endingShape: 'rounded' } },
-                        dataLabels: { enabled: false },
-                        colors: colors.slice(0, categories.length),
-                        title: { text: `Statistik ${title}`, align: 'center' },
-                        legend: { position: 'bottom' } 
-                    }).render();
+                // --- Normalizer khusus pendidikan ---
+                function normalizeEducation(raw) {
+                const s = String(raw ?? '').trim().toLowerCase()
+                    .replace(/\./g, '')           // hapus titik (S-1. → S-1)
+                    .replace(/\s+/g, ' ')         // rapihin spasi
+                    .replace(/-+/g, '-');         // rapihin dash
+                // mapping sinonim
+                if (/^sd$/.test(s)) return 'SD';
+                if (/^(sltp|smp)$/.test(s)) return 'SMP';
+                if (/^(slta|sma)$/.test(s)) return 'SMA';
+
+                if (/^(d1|di-?1|diploma ?i|diploma 1)$/i.test(s))  return 'D1';
+                if (/^(d2|di-?2|diploma ?ii|diploma 2)$/i.test(s)) return 'D2';
+                if (/^(d3|di-?3|diploma ?iii|diploma 3)$/i.test(s)) return 'D3';
+                if (/^(d4|di-?4|diploma ?iv|diploma 4)$/i.test(s)) return 'D4';
+
+                if (/^(s-?1|s1)$/i.test(s)) return 'S1';
+                if (/^(s-?2|s2)$/i.test(s)) return 'S2';
+                if (/^(s-?3|s3)$/i.test(s)) return 'S3';
+
+                return raw; // biar label anomali tetap tampil (di akhir)
                 }
 
-                // Cek apakah variabel data dari Laravel ada sebelum membuat chart
-                const rekapData = {
-                    golongan: {!! json_encode($rekapGolongan ?? []) !!},
-                    jabatan: {!! json_encode($rekapJabatan ?? []) !!},
-                    eselon: {!! json_encode($rekapEselon ?? []) !!},
-                    kepegawaian: {!! json_encode($rekapKepegawaian ?? []) !!},
-                    agama: {!! json_encode($rekapAgama ?? []) !!},
-                    jenisKelamin: {!! json_encode($rekapJenisKelamin ?? []) !!},
-                    statusNikah: {!! json_encode($rekapStatusNikah ?? []) !!},
-                    pendidikan: {!! json_encode($rekapPendidikan ?? []) !!},
-                };
+                // urutan custom pendidikan
+                const educationOrder = ['SD','SMP','SMA','D1','D2','D3','D4','S1','S2','S3'];
+                const orderIndex = Object.fromEntries(educationOrder.map((lvl, idx) => [lvl, idx]));
+                const collator = new Intl.Collator('id', { sensitivity: 'base', numeric: true });
 
-                // Looping untuk membuat chart secara otomatis jika datanya tersedia
-                Object.entries(rekapData).forEach(([key, data]) => {
-                    if (data.length > 0) {
-                        const categories = data
-                            .map(item => item.nama_jabatan || item.tingkat || item.golongan_ruang || item.eselon || item.jenis_kepegawaian || item.agama || item.jenis_kelamin || item.status_nikah)
-                            .filter(Boolean);
-
-                        const values = data.map(item => item.jumlah).filter(val => val !== undefined && val !== null);
-
-                        if (categories.length > 0 && values.length > 0) {
-                            createChart(
-                                `chart${key.charAt(0).toUpperCase() + key.slice(1)}`,
-                                key.replace(/([A-Z])/g, ' $1'),
-                                categories,
-                                values
-                            );
-                        }
-                    }
+                // SORT:
+                if (chartId.toLowerCase().includes('pendidikan')) {
+                paired.sort((a, b) => {
+                    const aKey = normalizeEducation(a.originalName);
+                    const bKey = normalizeEducation(b.originalName);
+                    const aRank = orderIndex[aKey] ?? 999;
+                    const bRank = orderIndex[bKey] ?? 999;
+                    if (aRank !== bRank) return aRank - bRank;       // urut sesuai rank
+                    return collator.compare(a.originalName, b.originalName); // tie-break alfabetis
                 });
+                } else {
+                // default A–Z
+                paired.sort((a, b) => collator.compare(a.originalName, b.originalName));
+                }
+
+                const seriesData = paired.map(item => ({
+                name: item.originalName,
+                data: [item.value]
+                }));
+
+                new ApexCharts(document.querySelector(`#${chartId}`), {
+                chart: { type: 'bar', height: 500, stacked: false },
+                series: seriesData,
+                xaxis: { categories: [title] },
+                yaxis: { title: { text: 'Jumlah' } },
+                plotOptions: { bar: { horizontal: false, endingShape: 'rounded' } },
+                dataLabels: { enabled: false },
+                colors: colors.slice(0, paired.length),
+                title: { text: `Statistik ${title}`, align: 'center' },
+                legend: { position: 'bottom' }
+                }).render();
+            }
+
+            // ==== sisanya biarin sama ====
+            const rekapData = {
+                golongan: {!! json_encode($rekapGolongan ?? []) !!},
+                jabatan: {!! json_encode($rekapJabatan ?? []) !!},
+                eselon: {!! json_encode($rekapEselon ?? []) !!},
+                kepegawaian: {!! json_encode($rekapKepegawaian ?? []) !!},
+                agama: {!! json_encode($rekapAgama ?? []) !!},
+                jenisKelamin: {!! json_encode($rekapJenisKelamin ?? []) !!},
+                statusNikah: {!! json_encode($rekapStatusNikah ?? []) !!},
+                pendidikan: {!! json_encode($rekapPendidikan ?? []) !!},
+            };
+
+            Object.entries(rekapData).forEach(([key, data]) => {
+                if (data.length > 0) {
+                    const categories = data
+                        .map(item =>
+                            item.nama_jabatan || item.tingkat || item.golongan_ruang ||
+                            item.eselon || item.jenis_kepegawaian || item.agama ||
+                            item.jenis_kelamin || item.status_nikah
+                        )
+                        .filter(Boolean);
+
+                    const values = data.map(item => item.jumlah).filter(v => v !== undefined && v !== null);
+
+                    if (categories.length > 0 && values.length > 0) {
+                        createChart(
+                            `chart${key.charAt(0).toUpperCase() + key.slice(1)}`,
+                            key.replace(/([A-Z])/g, ' $1'),
+                            categories,
+                            values
+                        );
+                    }
+                }
             });
+        });
         </script>
+
 @endsection
