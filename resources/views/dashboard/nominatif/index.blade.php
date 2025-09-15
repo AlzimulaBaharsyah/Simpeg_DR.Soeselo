@@ -44,17 +44,17 @@
                             <div class="col-md-6 col-lg-9">
                             <select class="form-select" name="unit_kerja" id="unit_kerja">
                                 <option value="">RSUD dr Soeselo Slawi</option>
-                                <option value="Direktur RSUD dr Soeselo" {{ old('unit_kerja')=='Direktur RSUD dr Soeselo' ? 'selected': '' }} >Direktur RSUD dr Soeselo</option>
-                                <option value="Direktur Pelayanan" {{ old('unit_kerja')=='Direktur Pelayanan' ? 'selected': '' }} >Direktur Pelayanan</option>
-                                <option value="Direktur Umum dan Keuangan" {{ old('unit_kerja')=='Direktur Umum dan Keuangan' ? 'selected': '' }} >Direktur Umum dan Keuangan</option>
-                                <option value="Bidang Pelayanan Medis" {{ old('unit_kerja')=='Bidang Pelayanan Medis' ? 'selected': '' }} >Bidang Pelayanan Medis</option>
-                                <option value="Bidang Pelayanan Keperawatan" {{ old('unit_kerja')=='Bidang Pelayanan Keperawatan' ? 'selected': '' }} >Bidang Pelayanan Keperawatan</option>
-                                <option value="Bidang Pelayanan Penunjang" {{ old('unit_kerja')=='Bidang Pelayanan Penunjang' ? 'selected': '' }} >Bidang Pelayanan Penunjang</option>
-                                <option value="Bagian Tata Usaha" {{ old('unit_kerja')=='Bagian Tata Usaha' ? 'selected': '' }} >Bagian Tata Usaha</option>
-                                <option value="Bagian Keuangan" {{ old('unit_kerja')=='Bagian Keuangan' ? 'selected': '' }} >Bagian Keuangan</option>
-                                <option value="Bagian Perencanaan" {{ old('unit_kerja')=='Bagian Perencanaan' ? 'selected': '' }} >Bagian Perencanaan</option>
-                                <option value="Subbagian Umum" {{ old('unit_kerja')=='Subbagian Umum' ? 'selected': '' }} >Subbagian Umum</option>
-                                <option value="Subbagian Kepegawaian" {{ old('unit_kerja')=='Subbagian Kepegawaian' ? 'selected': '' }} >Subbagian Kepegawaian</option>
+                                <option value="Direktur RSUD dr Soeselo" {{ old('unit_kerja', request('unit_kerja'))=='Direktur RSUD dr Soeselo' ? 'selected': '' }} >Direktur RSUD dr Soeselo</option>
+                                <option value="Direktur Pelayanan" {{ old('unit_kerja', request('unit_kerja'))=='Direktur Pelayanan' ? 'selected': '' }} >Direktur Pelayanan</option>
+                                <option value="Direktur Umum dan Keuangan" {{ old('unit_kerja', request('unit_kerja'))=='Direktur Umum dan Keuangan' ? 'selected': '' }} >Direktur Umum dan Keuangan</option>
+                                <option value="Bidang Pelayanan Medis" {{ old('unit_kerja', request('unit_kerja'))=='Bidang Pelayanan Medis' ? 'selected': '' }} >Bidang Pelayanan Medis</option>
+                                <option value="Bidang Pelayanan Keperawatan" {{ old('unit_kerja', request('unit_kerja'))=='Bidang Pelayanan Keperawatan' ? 'selected': '' }} >Bidang Pelayanan Keperawatan</option>
+                                <option value="Bidang Pelayanan Penunjang" {{ old('unit_kerja', request('unit_kerja'))=='Bidang Pelayanan Penunjang' ? 'selected': '' }} >Bidang Pelayanan Penunjang</option>
+                                <option value="Bagian Tata Usaha" {{ old('unit_kerja', request('unit_kerja'))=='Bagian Tata Usaha' ? 'selected': '' }} >Bagian Tata Usaha</option>
+                                <option value="Bagian Keuangan" {{ old('unit_kerja', request('unit_kerja'))=='Bagian Keuangan' ? 'selected': '' }} >Bagian Keuangan</option>
+                                <option value="Bagian Perencanaan" {{ old('unit_kerja', request('unit_kerja'))=='Bagian Perencanaan' ? 'selected': '' }} >Bagian Perencanaan</option>
+                                <option value="Subbagian Umum" {{ old('unit_kerja', request('unit_kerja'))=='Subbagian Umum' ? 'selected': '' }} >Subbagian Umum</option>
+                                <option value="Subbagian Kepegawaian" {{ old('unit_kerja', request('unit_kerja'))=='Subbagian Kepegawaian' ? 'selected': '' }} >Subbagian Kepegawaian</option>
                             </select>
                             @error('unit_kerja')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -69,125 +69,125 @@
                             <div class="col-md-6 col-lg-9">
                                 <select class="form-select" name="nama_jabatan" id="nama_jabatan">
                                     <option value="">-- Pilihan --</option>
-                                    <option value="Direktur RSUD dr Soeselo" {{ old('nama_jabatan')=='Direktur RSUD dr Soeselo' ? 'selected': '' }} >Direktur RSUD dr Soeselo</option>
-                                    <option value="Wakil Direktur Pelayanan" {{ old('nama_jabatan')=='Wakil Direktur Pelayanan' ? 'selected': '' }} >Wakil Direktur Pelayanan</option>
-                                    <option value="Kepala Bidang Pelayanan Medis" {{ old('nama_jabatan')=='Kepala Bidang Pelayanan Medis' ? 'selected': '' }} >Kepala Bidang Pelayanan Medis</option>
-                                    <option value="Dokter Ahli Utama" {{ old('nama_jabatan')=='Dokter Ahli Utama' ? 'selected': '' }} >Dokter Ahli Utama</option>
-                                    <option value="Dokter Ahli Madya" {{ old('nama_jabatan')=='Dokter Ahli Madya' ? 'selected': '' }} >Dokter Ahli Madya</option>
-                                    <option value="Dokter Ahli Muda" {{ old('nama_jabatan')=='Dokter Ahli Muda' ? 'selected': '' }} >Dokter Ahli Muda</option>
-                                    <option value="Dokter Ahli Pertama" {{ old('nama_jabatan')=='Dokter Ahli Pertama' ? 'selected': '' }} >Dokter Ahli Pertama</option>
-                                    <option value="Dokter Gigi Ahli Madya " {{ old('nama_jabatan')=='Dokter Gigi Ahli Madya ' ? 'selected': '' }} >Dokter Gigi Ahli Madya </option>
-                                    <option value="Penata Kelola Layanan Kesehatan" {{ old('nama_jabatan')=='Penata Kelola Layanan Kesehatan' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan</option>
-                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan')=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
-                                    <option value="Kepala Bidang Pelayanan Keperawatan" {{ old('nama_jabatan')=='Kepala Bidang Pelayanan Keperawatan' ? 'selected': '' }} >Kepala Bidang Pelayanan Keperawatan</option>
-                                    <option value="Perawat Ahli Madya" {{ old('nama_jabatan')=='Perawat Ahli Madya' ? 'selected': '' }} >Perawat Ahli Madya</option>
-                                    <option value="Perawat Ahli Muda" {{ old('nama_jabatan')=='Perawat Ahli Muda' ? 'selected': '' }} >Perawat Ahli Muda</option>
-                                    <option value="Perawat Ahli Pertama" {{ old('nama_jabatan')=='Perawat Ahli Pertama' ? 'selected': '' }} >Perawat Ahli Pertama</option>
-                                    <option value="Perawat Penyelia" {{ old('nama_jabatan')=='Perawat Penyelia' ? 'selected': '' }} >Perawat Penyelia</option>
-                                    <option value="Perawat Mahir" {{ old('nama_jabatan')=='Perawat Mahir' ? 'selected': '' }} >Perawat Mahir</option>
-                                    <option value="Perawat Terampil" {{ old('nama_jabatan')=='Perawat Terampil' ? 'selected': '' }} >Perawat Terampil</option>
-                                    <option value="Perawat Keahlian" {{ old('nama_jabatan')=='Perawat Keahlian' ? 'selected': '' }} >Perawat Keahlian</option>
-                                    <option value="Perawat Ketrampilan" {{ old('nama_jabatan')=='Perawat Ketrampilan' ? 'selected': '' }} >Perawat Ketrampilan</option>
-                                    <option value="Terapis Gigi dan Mulut Mahir" {{ old('nama_jabatan')=='Terapis Gigi dan Mulut Mahir' ? 'selected': '' }} >Terapis Gigi dan Mulut Mahir</option>
-                                    <option value="Terapis Gigi dan Mulut Terampil" {{ old('nama_jabatan')=='Terapis Gigi dan Mulut Terampil' ? 'selected': '' }} >Terapis Gigi dan Mulut Terampil</option>
-                                    <option value="Bidan Ahli Madya" {{ old('nama_jabatan')=='Bidan Ahli Madya' ? 'selected': '' }} >Bidan Ahli Madya</option>
-                                    <option value="Bidan Ahli Muda" {{ old('nama_jabatan')=='Bidan Ahli Muda' ? 'selected': '' }} >Bidan Ahli Muda</option>
-                                    <option value="Bidan Ahli Pertama" {{ old('nama_jabatan')=='Bidan Ahli Pertama' ? 'selected': '' }} >Bidan Ahli Pertama</option>
-                                    <option value="Bidan Penyelia" {{ old('nama_jabatan')=='Bidan Penyelia' ? 'selected': '' }} >Bidan Penyelia</option>
-                                    <option value="Bidan Mahir" {{ old('nama_jabatan')=='Bidan Mahir' ? 'selected': '' }} >Bidan Mahir</option>
-                                    <option value="Bidan Terampil" {{ old('nama_jabatan')=='Bidan Terampil' ? 'selected': '' }} >Bidan Terampil</option>
-                                    <option value="Penata Kelola Layanan Kesehatan " {{ old('nama_jabatan')=='Penata Kelola Layanan Kesehatan ' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan </option>
-                                    <option value="Pengelola Layanan Kesehatan" {{ old('nama_jabatan')=='Pengelola Layanan Kesehatan' ? 'selected': '' }} >Pengelola Layanan Kesehatan</option>
-                                    <option value="Pengadministrasi Perkantoran " {{ old('nama_jabatan')=='Pengadministrasi Perkantoran ' ? 'selected': '' }} >Pengadministrasi Perkantoran </option>
-                                    <option value="Operator Layanan Operasional " {{ old('nama_jabatan')=='Operator Layanan Operasional ' ? 'selected': '' }} >Operator Layanan Operasional </option>
-                                    <option value="Kepala Bidang Pelayanan Penunjang" {{ old('nama_jabatan')=='Kepala Bidang Pelayanan Penunjang' ? 'selected': '' }} >Kepala Bidang Pelayanan Penunjang</option>
-                                    <option value="Administrator Kesehatan Ahli Muda" {{ old('nama_jabatan')=='Administrator Kesehatan Ahli Muda' ? 'selected': '' }} >Administrator Kesehatan Ahli Muda</option>
-                                    <option value="Administrator Kesehatan Ahli Pertama" {{ old('nama_jabatan')=='Administrator Kesehatan Ahli Pertama' ? 'selected': '' }} >Administrator Kesehatan Ahli Pertama</option>
-                                    <option value="Apoteker Ahli Utama " {{ old('nama_jabatan')=='Apoteker Ahli Utama ' ? 'selected': '' }} >Apoteker Ahli Utama </option>
-                                    <option value="Apoteker Ahli Madya" {{ old('nama_jabatan')=='Apoteker Ahli Madya' ? 'selected': '' }} >Apoteker Ahli Madya</option>
-                                    <option value="Apoteker Ahli Pertama" {{ old('nama_jabatan')=='Apoteker Ahli Pertama' ? 'selected': '' }} >Apoteker Ahli Pertama</option>
-                                    <option value="Asisten Apoteker Penyelia" {{ old('nama_jabatan')=='Asisten Apoteker Penyelia' ? 'selected': '' }} >Asisten Apoteker Penyelia</option>
-                                    <option value="Asisten Apoteker Terampil" {{ old('nama_jabatan')=='Asisten Apoteker Terampil' ? 'selected': '' }} >Asisten Apoteker Terampil</option>
-                                    <option value="Nutrisionis Ahli Madya" {{ old('nama_jabatan')=='Nutrisionis Ahli Madya' ? 'selected': '' }} >Nutrisionis Ahli Madya</option>
-                                    <option value="Nutrisionis Ahli Pertama " {{ old('nama_jabatan')=='Nutrisionis Ahli Pertama ' ? 'selected': '' }} >Nutrisionis Ahli Pertama </option>
-                                    <option value="Nutrisionis Penyelia" {{ old('nama_jabatan')=='Nutrisionis Penyelia' ? 'selected': '' }} >Nutrisionis Penyelia</option>
-                                    <option value="Radiografer Ahli Madya " {{ old('nama_jabatan')=='Radiografer Ahli Madya ' ? 'selected': '' }} >Radiografer Ahli Madya </option>
-                                    <option value="Radiografer Ahli Muda " {{ old('nama_jabatan')=='Radiografer Ahli Muda ' ? 'selected': '' }} >Radiografer Ahli Muda </option>
-                                    <option value="Radiografer Ahli Pertama " {{ old('nama_jabatan')=='Radiografer Ahli Pertama ' ? 'selected': '' }} >Radiografer Ahli Pertama </option>
-                                    <option value="Radiografer Penyelia " {{ old('nama_jabatan')=='Radiografer Penyelia ' ? 'selected': '' }} >Radiografer Penyelia </option>
-                                    <option value="Radiografer Terampil " {{ old('nama_jabatan')=='Radiografer Terampil ' ? 'selected': '' }} >Radiografer Terampil </option>
-                                    <option value="Pranata Laboratorium Kesehatan Ahli Madya" {{ old('nama_jabatan')=='Pranata Laboratorium Kesehatan Ahli Madya' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Ahli Madya</option>
-                                    <option value="Pranata Laboratorium Kesehatan Ahli Muda" {{ old('nama_jabatan')=='Pranata Laboratorium Kesehatan Ahli Muda' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Ahli Muda</option>
-                                    <option value="Pranata Laboratorium Kesehatan Penyelia" {{ old('nama_jabatan')=='Pranata Laboratorium Kesehatan Penyelia' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Penyelia</option>
-                                    <option value="Pranata Laboratorium Kesehatan Mahir" {{ old('nama_jabatan')=='Pranata Laboratorium Kesehatan Mahir' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Mahir</option>
-                                    <option value="Pranata Laboratorium Kesehatan Terampil" {{ old('nama_jabatan')=='Pranata Laboratorium Kesehatan Terampil' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Terampil</option>
-                                    <option value="Fisioterapis Ahli Madya" {{ old('nama_jabatan')=='Fisioterapis Ahli Madya' ? 'selected': '' }} >Fisioterapis Ahli Madya</option>
-                                    <option value="Fisioterapis Ahli Muda" {{ old('nama_jabatan')=='Fisioterapis Ahli Muda' ? 'selected': '' }} >Fisioterapis Ahli Muda</option>
-                                    <option value="Fisioterapis Ahli Pertama" {{ old('nama_jabatan')=='Fisioterapis Ahli Pertama' ? 'selected': '' }} >Fisioterapis Ahli Pertama</option>
-                                    <option value="Fisioterapis Penyelia" {{ old('nama_jabatan')=='Fisioterapis Penyelia' ? 'selected': '' }} >Fisioterapis Penyelia</option>
-                                    <option value="Fisioterapis Terampil" {{ old('nama_jabatan')=='Fisioterapis Terampil' ? 'selected': '' }} >Fisioterapis Terampil</option>
-                                    <option value="Refraksionis Optisien Penyelia" {{ old('nama_jabatan')=='Refraksionis Optisien Penyelia' ? 'selected': '' }} >Refraksionis Optisien Penyelia</option>
-                                    <option value="Refraksionis Optisien Mahir" {{ old('nama_jabatan')=='Refraksionis Optisien Mahir' ? 'selected': '' }} >Refraksionis Optisien Mahir</option>
-                                    <option value="Perekam Medis Penyelia" {{ old('nama_jabatan')=='Perekam Medis Penyelia' ? 'selected': '' }} >Perekam Medis Penyelia</option>
-                                    <option value="Perekam Medis Mahir" {{ old('nama_jabatan')=='Perekam Medis Mahir' ? 'selected': '' }} >Perekam Medis Mahir</option>
-                                    <option value="Perekam Medis Terampil" {{ old('nama_jabatan')=='Perekam Medis Terampil' ? 'selected': '' }} >Perekam Medis Terampil</option>
-                                    <option value="Okupasi Terapis Mahir" {{ old('nama_jabatan')=='Okupasi Terapis Mahir' ? 'selected': '' }} >Okupasi Terapis Mahir</option>
-                                    <option value="Okupasi Terapis Terampil" {{ old('nama_jabatan')=='Okupasi Terapis Terampil' ? 'selected': '' }} >Okupasi Terapis Terampil</option>
-                                    <option value="Penata Anestesi Ahli Madya" {{ old('nama_jabatan')=='Penata Anestesi Ahli Madya' ? 'selected': '' }} >Penata Anestesi Ahli Madya</option>
-                                    <option value="Penata Anestesi Ahli Muda" {{ old('nama_jabatan')=='Penata Anestesi Ahli Muda' ? 'selected': '' }} >Penata Anestesi Ahli Muda</option>
-                                    <option value="Penata Anestesi Ahli Pertama" {{ old('nama_jabatan')=='Penata Anestesi Ahli Pertama' ? 'selected': '' }} >Penata Anestesi Ahli Pertama</option>
-                                    <option value="Asisten Penata Anestesi Penyelia" {{ old('nama_jabatan')=='Asisten Penata Anestesi Penyelia' ? 'selected': '' }} >Asisten Penata Anestesi Penyelia</option>
-                                    <option value="Asisten Penata Anestesi Terampil" {{ old('nama_jabatan')=='Asisten Penata Anestesi Terampil' ? 'selected': '' }} >Asisten Penata Anestesi Terampil</option>
-                                    <option value="Psikolog Klinis Ahli Pertama" {{ old('nama_jabatan')=='Psikolog Klinis Ahli Pertama' ? 'selected': '' }} >Psikolog Klinis Ahli Pertama</option>
-                                    <option value="Tenaga Sanitasi Lingkungan Ahli Madya " {{ old('nama_jabatan')=='Tenaga Sanitasi Lingkungan Ahli Madya ' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Madya </option>
-                                    <option value="Tenaga Sanitasi Lingkungan Ahli Muda" {{ old('nama_jabatan')=='Tenaga Sanitasi Lingkungan Ahli Muda' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Muda</option>
-                                    <option value="Tenaga Sanitasi Lingkungan Ahli Pertama" {{ old('nama_jabatan')=='Tenaga Sanitasi Lingkungan Ahli Pertama' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Pertama</option>
-                                    <option value="Tenaga Sanitasi Lingkungan Terampil" {{ old('nama_jabatan')=='Tenaga Sanitasi Lingkungan Terampil' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Terampil</option>
-                                    <option value="Teknisi Elektromedis Ahli Pertama" {{ old('nama_jabatan')=='Teknisi Elektromedis Ahli Pertama' ? 'selected': '' }} >Teknisi Elektromedis Ahli Pertama</option>
-                                    <option value="Teknisi Elektromedis Penyelia" {{ old('nama_jabatan')=='Teknisi Elektromedis Penyelia' ? 'selected': '' }} >Teknisi Elektromedis Penyelia</option>
-                                    <option value="Teknisi Elektromedis Mahir" {{ old('nama_jabatan')=='Teknisi Elektromedis Mahir' ? 'selected': '' }} >Teknisi Elektromedis Mahir</option>
-                                    <option value="Teknisi Elektromedis Terampil" {{ old('nama_jabatan')=='Teknisi Elektromedis Terampil' ? 'selected': '' }} >Teknisi Elektromedis Terampil</option>
-                                    <option value="Fisikawan Medis Ahli Pertama" {{ old('nama_jabatan')=='Fisikawan Medis Ahli Pertama' ? 'selected': '' }} >Fisikawan Medis Ahli Pertama</option>
-                                    <option value="Pembimbing Kesehatan Kerja Ahli Pertama" {{ old('nama_jabatan')=='Pembimbing Kesehatan Kerja Ahli Pertama' ? 'selected': '' }} >Pembimbing Kesehatan Kerja Ahli Pertama</option>
-                                    <option value="Teknisi Transfusi Darah Terampil" {{ old('nama_jabatan')=='Teknisi Transfusi Darah Terampil' ? 'selected': '' }} >Teknisi Transfusi Darah Terampil</option>
-                                    <option value="Terapis Wicara Mahir" {{ old('nama_jabatan')=='Terapis Wicara Mahir' ? 'selected': '' }} >Terapis Wicara Mahir</option>
-                                    <option value="Terapis Wicara Terampil" {{ old('nama_jabatan')=='Terapis Wicara Terampil' ? 'selected': '' }} >Terapis Wicara Terampil</option>
-                                    <option value="Ortotis Prostetis Terampil" {{ old('nama_jabatan')=='Ortotis Prostetis Terampil' ? 'selected': '' }} >Ortotis Prostetis Terampil</option>
-                                    <option value="Penata Kelola Layanan Kesehatan" {{ old('nama_jabatan')=='Penata Kelola Layanan Kesehatan' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan</option>
-                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan')=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
-                                    <option value="Operator Layanan Kesehatan" {{ old('nama_jabatan')=='Operator Layanan Kesehatan' ? 'selected': '' }} >Operator Layanan Kesehatan</option>
-                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan')=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
-                                    <option value="Pengelola Umum Operasional" {{ old('nama_jabatan')=='Pengelola Umum Operasional' ? 'selected': '' }} >Pengelola Umum Operasional</option>
-                                    <option value="Wakil Direktur Umum dan Keuangan" {{ old('nama_jabatan')=='Wakil Direktur Umum dan Keuangan' ? 'selected': '' }} >Wakil Direktur Umum dan Keuangan</option>
-                                    <option value="Kepala Bagian Tata Usaha" {{ old('nama_jabatan')=='Kepala Bagian Tata Usaha' ? 'selected': '' }} >Kepala Bagian Tata Usaha</option>
-                                    <option value="Kepala Subbagian Umum" {{ old('nama_jabatan')=='Kepala Subbagian Umum' ? 'selected': '' }} >Kepala Subbagian Umum</option>
-                                    <option value="Pranata Komputer Ahli Pertama" {{ old('nama_jabatan')=='Pranata Komputer Ahli Pertama' ? 'selected': '' }} >Pranata Komputer Ahli Pertama</option>
-                                    <option value="Penyuluh Kesehatan Masyarakat Ahli Pertama" {{ old('nama_jabatan')=='Penyuluh Kesehatan Masyarakat Ahli Pertama' ? 'selected': '' }} >Penyuluh Kesehatan Masyarakat Ahli Pertama</option>
-                                    <option value="Pranata Komputer Terampil " {{ old('nama_jabatan')=='Pranata Komputer Terampil ' ? 'selected': '' }} >Pranata Komputer Terampil </option>
-                                    <option value="Arsiparis Terampil" {{ old('nama_jabatan')=='Arsiparis Terampil' ? 'selected': '' }} >Arsiparis Terampil</option>
-                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan')=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
-                                    <option value="Penata Layanan Operasional" {{ old('nama_jabatan')=='Penata Layanan Operasional' ? 'selected': '' }} >Penata Layanan Operasional</option>
-                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan')=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
-                                    <option value="Pengolah Data dan Informasi" {{ old('nama_jabatan')=='Pengolah Data dan Informasi' ? 'selected': '' }} >Pengolah Data dan Informasi</option>
-                                    <option value="Dokumentalis Hukum" {{ old('nama_jabatan')=='Dokumentalis Hukum' ? 'selected': '' }} >Dokumentalis Hukum</option>
-                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan')=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
-                                    <option value="Operator Layanan Operasiona" {{ old('nama_jabatan')=='Operator Layanan Operasiona' ? 'selected': '' }} >Operator Layanan Operasiona</option>
-                                    <option value="Kepala Subbagian Kepegawaian" {{ old('nama_jabatan')=='Kepala Subbagian Kepegawaian' ? 'selected': '' }} >Kepala Subbagian Kepegawaian</option>
-                                    <option value="Penata Layanan Operasional" {{ old('nama_jabatan')=='Penata Layanan Operasional' ? 'selected': '' }} >Penata Layanan Operasional</option>
-                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan')=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
-                                    <option value="Operator Layanan Operasional" {{ old('nama_jabatan')=='Operator Layanan Operasional' ? 'selected': '' }} >Operator Layanan Operasional</option>
-                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan')=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
-                                    <option value="Kepala Bagian Keuangan" {{ old('nama_jabatan')=='Kepala Bagian Keuangan' ? 'selected': '' }} >Kepala Bagian Keuangan</option>
-                                    <option value="Analis Keuangan Pusat dan Daerah Ahli Muda" {{ old('nama_jabatan')=='Analis Keuangan Pusat dan Daerah Ahli Muda' ? 'selected': '' }} >Analis Keuangan Pusat dan Daerah Ahli Muda</option>
-                                    <option value="Analis Keuangan Pusat dan Daerah Ahli Pertama" {{ old('nama_jabatan')=='Analis Keuangan Pusat dan Daerah Ahli Pertama' ? 'selected': '' }} >Analis Keuangan Pusat dan Daerah Ahli Pertama</option>
-                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan')=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
-                                    <option value="Fasilitator Pemerintahan" {{ old('nama_jabatan')=='Fasilitator Pemerintahan' ? 'selected': '' }} >Fasilitator Pemerintahan</option>
-                                    <option value="Pengolah Data dan Informasi " {{ old('nama_jabatan')=='Pengolah Data dan Informasi ' ? 'selected': '' }} >Pengolah Data dan Informasi </option>
-                                    <option value="Operator Layanan Operasional " {{ old('nama_jabatan')=='Operator Layanan Operasional ' ? 'selected': '' }} >Operator Layanan Operasional </option>
-                                    <option value="Kepala Bagian Perencanaan" {{ old('nama_jabatan')=='Kepala Bagian Perencanaan' ? 'selected': '' }} >Kepala Bagian Perencanaan</option>
-                                    <option value="Perencana Ahli Pertama" {{ old('nama_jabatan')=='Perencana Ahli Pertama' ? 'selected': '' }} >Perencana Ahli Pertama</option>
-                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan')=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
-                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan')=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
+                                    <option value="Direktur RSUD dr Soeselo" {{ old('nama_jabatan', request('nama_jabatan'))=='Direktur RSUD dr Soeselo' ? 'selected': '' }} >Direktur RSUD dr Soeselo</option>
+                                    <option value="Wakil Direktur Pelayanan" {{ old('nama_jabatan', request('nama_jabatan'))=='Wakil Direktur Pelayanan' ? 'selected': '' }} >Wakil Direktur Pelayanan</option>
+                                    <option value="Kepala Bidang Pelayanan Medis" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bidang Pelayanan Medis' ? 'selected': '' }} >Kepala Bidang Pelayanan Medis</option>
+                                    <option value="Dokter Ahli Utama" {{ old('nama_jabatan', request('nama_jabatan'))=='Dokter Ahli Utama' ? 'selected': '' }} >Dokter Ahli Utama</option>
+                                    <option value="Dokter Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Dokter Ahli Madya' ? 'selected': '' }} >Dokter Ahli Madya</option>
+                                    <option value="Dokter Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Dokter Ahli Muda' ? 'selected': '' }} >Dokter Ahli Muda</option>
+                                    <option value="Dokter Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Dokter Ahli Pertama' ? 'selected': '' }} >Dokter Ahli Pertama</option>
+                                    <option value="Dokter Gigi Ahli Madya " {{ old('nama_jabatan', request('nama_jabatan'))=='Dokter Gigi Ahli Madya ' ? 'selected': '' }} >Dokter Gigi Ahli Madya </option>
+                                    <option value="Penata Kelola Layanan Kesehatan" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Kelola Layanan Kesehatan' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan</option>
+                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
+                                    <option value="Kepala Bidang Pelayanan Keperawatan" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bidang Pelayanan Keperawatan' ? 'selected': '' }} >Kepala Bidang Pelayanan Keperawatan</option>
+                                    <option value="Perawat Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Ahli Madya' ? 'selected': '' }} >Perawat Ahli Madya</option>
+                                    <option value="Perawat Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Ahli Muda' ? 'selected': '' }} >Perawat Ahli Muda</option>
+                                    <option value="Perawat Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Ahli Pertama' ? 'selected': '' }} >Perawat Ahli Pertama</option>
+                                    <option value="Perawat Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Penyelia' ? 'selected': '' }} >Perawat Penyelia</option>
+                                    <option value="Perawat Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Mahir' ? 'selected': '' }} >Perawat Mahir</option>
+                                    <option value="Perawat Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Terampil' ? 'selected': '' }} >Perawat Terampil</option>
+                                    <option value="Perawat Keahlian" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Keahlian' ? 'selected': '' }} >Perawat Keahlian</option>
+                                    <option value="Perawat Ketrampilan" {{ old('nama_jabatan', request('nama_jabatan'))=='Perawat Ketrampilan' ? 'selected': '' }} >Perawat Ketrampilan</option>
+                                    <option value="Terapis Gigi dan Mulut Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Terapis Gigi dan Mulut Mahir' ? 'selected': '' }} >Terapis Gigi dan Mulut Mahir</option>
+                                    <option value="Terapis Gigi dan Mulut Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Terapis Gigi dan Mulut Terampil' ? 'selected': '' }} >Terapis Gigi dan Mulut Terampil</option>
+                                    <option value="Bidan Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Ahli Madya' ? 'selected': '' }} >Bidan Ahli Madya</option>
+                                    <option value="Bidan Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Ahli Muda' ? 'selected': '' }} >Bidan Ahli Muda</option>
+                                    <option value="Bidan Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Ahli Pertama' ? 'selected': '' }} >Bidan Ahli Pertama</option>
+                                    <option value="Bidan Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Penyelia' ? 'selected': '' }} >Bidan Penyelia</option>
+                                    <option value="Bidan Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Mahir' ? 'selected': '' }} >Bidan Mahir</option>
+                                    <option value="Bidan Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Bidan Terampil' ? 'selected': '' }} >Bidan Terampil</option>
+                                    <option value="Penata Kelola Layanan Kesehatan " {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Kelola Layanan Kesehatan ' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan </option>
+                                    <option value="Pengelola Layanan Kesehatan" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengelola Layanan Kesehatan' ? 'selected': '' }} >Pengelola Layanan Kesehatan</option>
+                                    <option value="Pengadministrasi Perkantoran " {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran ' ? 'selected': '' }} >Pengadministrasi Perkantoran </option>
+                                    <option value="Operator Layanan Operasional " {{ old('nama_jabatan', request('nama_jabatan'))=='Operator Layanan Operasional ' ? 'selected': '' }} >Operator Layanan Operasional </option>
+                                    <option value="Kepala Bidang Pelayanan Penunjang" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bidang Pelayanan Penunjang' ? 'selected': '' }} >Kepala Bidang Pelayanan Penunjang</option>
+                                    <option value="Administrator Kesehatan Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Administrator Kesehatan Ahli Muda' ? 'selected': '' }} >Administrator Kesehatan Ahli Muda</option>
+                                    <option value="Administrator Kesehatan Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Administrator Kesehatan Ahli Pertama' ? 'selected': '' }} >Administrator Kesehatan Ahli Pertama</option>
+                                    <option value="Apoteker Ahli Utama " {{ old('nama_jabatan', request('nama_jabatan'))=='Apoteker Ahli Utama ' ? 'selected': '' }} >Apoteker Ahli Utama </option>
+                                    <option value="Apoteker Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Apoteker Ahli Madya' ? 'selected': '' }} >Apoteker Ahli Madya</option>
+                                    <option value="Apoteker Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Apoteker Ahli Pertama' ? 'selected': '' }} >Apoteker Ahli Pertama</option>
+                                    <option value="Asisten Apoteker Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Asisten Apoteker Penyelia' ? 'selected': '' }} >Asisten Apoteker Penyelia</option>
+                                    <option value="Asisten Apoteker Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Asisten Apoteker Terampil' ? 'selected': '' }} >Asisten Apoteker Terampil</option>
+                                    <option value="Nutrisionis Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Nutrisionis Ahli Madya' ? 'selected': '' }} >Nutrisionis Ahli Madya</option>
+                                    <option value="Nutrisionis Ahli Pertama " {{ old('nama_jabatan', request('nama_jabatan'))=='Nutrisionis Ahli Pertama ' ? 'selected': '' }} >Nutrisionis Ahli Pertama </option>
+                                    <option value="Nutrisionis Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Nutrisionis Penyelia' ? 'selected': '' }} >Nutrisionis Penyelia</option>
+                                    <option value="Radiografer Ahli Madya " {{ old('nama_jabatan', request('nama_jabatan'))=='Radiografer Ahli Madya ' ? 'selected': '' }} >Radiografer Ahli Madya </option>
+                                    <option value="Radiografer Ahli Muda " {{ old('nama_jabatan', request('nama_jabatan'))=='Radiografer Ahli Muda ' ? 'selected': '' }} >Radiografer Ahli Muda </option>
+                                    <option value="Radiografer Ahli Pertama " {{ old('nama_jabatan', request('nama_jabatan'))=='Radiografer Ahli Pertama ' ? 'selected': '' }} >Radiografer Ahli Pertama </option>
+                                    <option value="Radiografer Penyelia " {{ old('nama_jabatan', request('nama_jabatan'))=='Radiografer Penyelia ' ? 'selected': '' }} >Radiografer Penyelia </option>
+                                    <option value="Radiografer Terampil " {{ old('nama_jabatan', request('nama_jabatan'))=='Radiografer Terampil ' ? 'selected': '' }} >Radiografer Terampil </option>
+                                    <option value="Pranata Laboratorium Kesehatan Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Laboratorium Kesehatan Ahli Madya' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Ahli Madya</option>
+                                    <option value="Pranata Laboratorium Kesehatan Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Laboratorium Kesehatan Ahli Muda' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Ahli Muda</option>
+                                    <option value="Pranata Laboratorium Kesehatan Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Laboratorium Kesehatan Penyelia' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Penyelia</option>
+                                    <option value="Pranata Laboratorium Kesehatan Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Laboratorium Kesehatan Mahir' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Mahir</option>
+                                    <option value="Pranata Laboratorium Kesehatan Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Laboratorium Kesehatan Terampil' ? 'selected': '' }} >Pranata Laboratorium Kesehatan Terampil</option>
+                                    <option value="Fisioterapis Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisioterapis Ahli Madya' ? 'selected': '' }} >Fisioterapis Ahli Madya</option>
+                                    <option value="Fisioterapis Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisioterapis Ahli Muda' ? 'selected': '' }} >Fisioterapis Ahli Muda</option>
+                                    <option value="Fisioterapis Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisioterapis Ahli Pertama' ? 'selected': '' }} >Fisioterapis Ahli Pertama</option>
+                                    <option value="Fisioterapis Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisioterapis Penyelia' ? 'selected': '' }} >Fisioterapis Penyelia</option>
+                                    <option value="Fisioterapis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisioterapis Terampil' ? 'selected': '' }} >Fisioterapis Terampil</option>
+                                    <option value="Refraksionis Optisien Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Refraksionis Optisien Penyelia' ? 'selected': '' }} >Refraksionis Optisien Penyelia</option>
+                                    <option value="Refraksionis Optisien Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Refraksionis Optisien Mahir' ? 'selected': '' }} >Refraksionis Optisien Mahir</option>
+                                    <option value="Perekam Medis Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Perekam Medis Penyelia' ? 'selected': '' }} >Perekam Medis Penyelia</option>
+                                    <option value="Perekam Medis Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Perekam Medis Mahir' ? 'selected': '' }} >Perekam Medis Mahir</option>
+                                    <option value="Perekam Medis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Perekam Medis Terampil' ? 'selected': '' }} >Perekam Medis Terampil</option>
+                                    <option value="Okupasi Terapis Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Okupasi Terapis Mahir' ? 'selected': '' }} >Okupasi Terapis Mahir</option>
+                                    <option value="Okupasi Terapis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Okupasi Terapis Terampil' ? 'selected': '' }} >Okupasi Terapis Terampil</option>
+                                    <option value="Penata Anestesi Ahli Madya" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Anestesi Ahli Madya' ? 'selected': '' }} >Penata Anestesi Ahli Madya</option>
+                                    <option value="Penata Anestesi Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Anestesi Ahli Muda' ? 'selected': '' }} >Penata Anestesi Ahli Muda</option>
+                                    <option value="Penata Anestesi Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Anestesi Ahli Pertama' ? 'selected': '' }} >Penata Anestesi Ahli Pertama</option>
+                                    <option value="Asisten Penata Anestesi Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Asisten Penata Anestesi Penyelia' ? 'selected': '' }} >Asisten Penata Anestesi Penyelia</option>
+                                    <option value="Asisten Penata Anestesi Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Asisten Penata Anestesi Terampil' ? 'selected': '' }} >Asisten Penata Anestesi Terampil</option>
+                                    <option value="Psikolog Klinis Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Psikolog Klinis Ahli Pertama' ? 'selected': '' }} >Psikolog Klinis Ahli Pertama</option>
+                                    <option value="Tenaga Sanitasi Lingkungan Ahli Madya " {{ old('nama_jabatan', request('nama_jabatan'))=='Tenaga Sanitasi Lingkungan Ahli Madya ' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Madya </option>
+                                    <option value="Tenaga Sanitasi Lingkungan Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Tenaga Sanitasi Lingkungan Ahli Muda' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Muda</option>
+                                    <option value="Tenaga Sanitasi Lingkungan Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Tenaga Sanitasi Lingkungan Ahli Pertama' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Ahli Pertama</option>
+                                    <option value="Tenaga Sanitasi Lingkungan Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Tenaga Sanitasi Lingkungan Terampil' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan Terampil</option>
+                                    <option value="Teknisi Elektromedis Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Teknisi Elektromedis Ahli Pertama' ? 'selected': '' }} >Teknisi Elektromedis Ahli Pertama</option>
+                                    <option value="Teknisi Elektromedis Penyelia" {{ old('nama_jabatan', request('nama_jabatan'))=='Teknisi Elektromedis Penyelia' ? 'selected': '' }} >Teknisi Elektromedis Penyelia</option>
+                                    <option value="Teknisi Elektromedis Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Teknisi Elektromedis Mahir' ? 'selected': '' }} >Teknisi Elektromedis Mahir</option>
+                                    <option value="Teknisi Elektromedis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Teknisi Elektromedis Terampil' ? 'selected': '' }} >Teknisi Elektromedis Terampil</option>
+                                    <option value="Fisikawan Medis Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Fisikawan Medis Ahli Pertama' ? 'selected': '' }} >Fisikawan Medis Ahli Pertama</option>
+                                    <option value="Pembimbing Kesehatan Kerja Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Pembimbing Kesehatan Kerja Ahli Pertama' ? 'selected': '' }} >Pembimbing Kesehatan Kerja Ahli Pertama</option>
+                                    <option value="Teknisi Transfusi Darah Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Teknisi Transfusi Darah Terampil' ? 'selected': '' }} >Teknisi Transfusi Darah Terampil</option>
+                                    <option value="Terapis Wicara Mahir" {{ old('nama_jabatan', request('nama_jabatan'))=='Terapis Wicara Mahir' ? 'selected': '' }} >Terapis Wicara Mahir</option>
+                                    <option value="Terapis Wicara Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Terapis Wicara Terampil' ? 'selected': '' }} >Terapis Wicara Terampil</option>
+                                    <option value="Ortotis Prostetis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Ortotis Prostetis Terampil' ? 'selected': '' }} >Ortotis Prostetis Terampil</option>
+                                    <option value="Penata Kelola Layanan Kesehatan" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Kelola Layanan Kesehatan' ? 'selected': '' }} >Penata Kelola Layanan Kesehatan</option>
+                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
+                                    <option value="Operator Layanan Kesehatan" {{ old('nama_jabatan', request('nama_jabatan'))=='Operator Layanan Kesehatan' ? 'selected': '' }} >Operator Layanan Kesehatan</option>
+                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
+                                    <option value="Pengelola Umum Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengelola Umum Operasional' ? 'selected': '' }} >Pengelola Umum Operasional</option>
+                                    <option value="Wakil Direktur Umum dan Keuangan" {{ old('nama_jabatan', request('nama_jabatan'))=='Wakil Direktur Umum dan Keuangan' ? 'selected': '' }} >Wakil Direktur Umum dan Keuangan</option>
+                                    <option value="Kepala Bagian Tata Usaha" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bagian Tata Usaha' ? 'selected': '' }} >Kepala Bagian Tata Usaha</option>
+                                    <option value="Kepala Subbagian Umum" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Subbagian Umum' ? 'selected': '' }} >Kepala Subbagian Umum</option>
+                                    <option value="Pranata Komputer Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Komputer Ahli Pertama' ? 'selected': '' }} >Pranata Komputer Ahli Pertama</option>
+                                    <option value="Penyuluh Kesehatan Masyarakat Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Penyuluh Kesehatan Masyarakat Ahli Pertama' ? 'selected': '' }} >Penyuluh Kesehatan Masyarakat Ahli Pertama</option>
+                                    <option value="Pranata Komputer Terampil " {{ old('nama_jabatan', request('nama_jabatan'))=='Pranata Komputer Terampil ' ? 'selected': '' }} >Pranata Komputer Terampil </option>
+                                    <option value="Arsiparis Terampil" {{ old('nama_jabatan', request('nama_jabatan'))=='Arsiparis Terampil' ? 'selected': '' }} >Arsiparis Terampil</option>
+                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan', request('nama_jabatan'))=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
+                                    <option value="Penata Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Layanan Operasional' ? 'selected': '' }} >Penata Layanan Operasional</option>
+                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
+                                    <option value="Pengolah Data dan Informasi" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengolah Data dan Informasi' ? 'selected': '' }} >Pengolah Data dan Informasi</option>
+                                    <option value="Dokumentalis Hukum" {{ old('nama_jabatan', request('nama_jabatan'))=='Dokumentalis Hukum' ? 'selected': '' }} >Dokumentalis Hukum</option>
+                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
+                                    <option value="Operator Layanan Operasiona" {{ old('nama_jabatan', request('nama_jabatan'))=='Operator Layanan Operasiona' ? 'selected': '' }} >Operator Layanan Operasiona</option>
+                                    <option value="Kepala Subbagian Kepegawaian" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Subbagian Kepegawaian' ? 'selected': '' }} >Kepala Subbagian Kepegawaian</option>
+                                    <option value="Penata Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Penata Layanan Operasional' ? 'selected': '' }} >Penata Layanan Operasional</option>
+                                    <option value="Pengelola Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengelola Layanan Operasional' ? 'selected': '' }} >Pengelola Layanan Operasional</option>
+                                    <option value="Operator Layanan Operasional" {{ old('nama_jabatan', request('nama_jabatan'))=='Operator Layanan Operasional' ? 'selected': '' }} >Operator Layanan Operasional</option>
+                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
+                                    <option value="Kepala Bagian Keuangan" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bagian Keuangan' ? 'selected': '' }} >Kepala Bagian Keuangan</option>
+                                    <option value="Analis Keuangan Pusat dan Daerah Ahli Muda" {{ old('nama_jabatan', request('nama_jabatan'))=='Analis Keuangan Pusat dan Daerah Ahli Muda' ? 'selected': '' }} >Analis Keuangan Pusat dan Daerah Ahli Muda</option>
+                                    <option value="Analis Keuangan Pusat dan Daerah Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Analis Keuangan Pusat dan Daerah Ahli Pertama' ? 'selected': '' }} >Analis Keuangan Pusat dan Daerah Ahli Pertama</option>
+                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan', request('nama_jabatan'))=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
+                                    <option value="Fasilitator Pemerintahan" {{ old('nama_jabatan', request('nama_jabatan'))=='Fasilitator Pemerintahan' ? 'selected': '' }} >Fasilitator Pemerintahan</option>
+                                    <option value="Pengolah Data dan Informasi " {{ old('nama_jabatan', request('nama_jabatan'))=='Pengolah Data dan Informasi ' ? 'selected': '' }} >Pengolah Data dan Informasi </option>
+                                    <option value="Operator Layanan Operasional " {{ old('nama_jabatan', request('nama_jabatan'))=='Operator Layanan Operasional ' ? 'selected': '' }} >Operator Layanan Operasional </option>
+                                    <option value="Kepala Bagian Perencanaan" {{ old('nama_jabatan', request('nama_jabatan'))=='Kepala Bagian Perencanaan' ? 'selected': '' }} >Kepala Bagian Perencanaan</option>
+                                    <option value="Perencana Ahli Pertama" {{ old('nama_jabatan', request('nama_jabatan'))=='Perencana Ahli Pertama' ? 'selected': '' }} >Perencana Ahli Pertama</option>
+                                    <option value="Penelaah Teknis Kebijakan" {{ old('nama_jabatan', request('nama_jabatan'))=='Penelaah Teknis Kebijakan' ? 'selected': '' }} >Penelaah Teknis Kebijakan</option>
+                                    <option value="Pengadministrasi Perkantoran" {{ old('nama_jabatan', request('nama_jabatan'))=='Pengadministrasi Perkantoran' ? 'selected': '' }} >Pengadministrasi Perkantoran</option>
                                 </select>
                                 @error('nama_jabatan')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -201,30 +201,30 @@
                         <div class="col-md-4 col-lg-3">
                             <select class="form-select" name="formasi_jabatan" id="formasi_jabatan">
                                 <option value="">-- Pilihan --</option>
-                                <option value="Dokter" {{ old('formasi_jabatan')=='Dokter' ? 'selected': '' }} >Dokter</option>
-                                <option value="Perawat" {{ old('formasi_jabatan')=='Perawat' ? 'selected': '' }} >Perawat</option>
-                                <option value="Terapis Gigi dan Mulut" {{ old('formasi_jabatan')=='Terapis Gigi dan Mulut' ? 'selected': '' }} >Terapis Gigi dan Mulut</option>
-                                <option value="Bidan" {{ old('formasi_jabatan')=='Bidan' ? 'selected': '' }} >Bidan</option>
-                                <option value="Administrator Kesehatan" {{ old('formasi_jabatan')=='Administrator Kesehatan' ? 'selected': '' }} >Administrator Kesehatan</option>
-                                <option value="Apoteker" {{ old('formasi_jabatan')=='Apoteker' ? 'selected': '' }} >Apoteker</option>
-                                <option value="Asisten Apoteker" {{ old('formasi_jabatan')=='Asisten Apoteker' ? 'selected': '' }} >Asisten Apoteker</option>
-                                <option value="Nutrisionis" {{ old('formasi_jabatan')=='Nutrisionis' ? 'selected': '' }} >Nutrisionis</option>
-                                <option value="Radiografer" {{ old('formasi_jabatan')=='Radiografer' ? 'selected': '' }} >Radiografer</option>
-                                <option value="Pranata Laboratorium Kesehatan" {{ old('formasi_jabatan')=='Pranata Laboratorium Kesehatan' ? 'selected': '' }} >Pranata Laboratorium Kesehatan</option>
-                                <option value="Fisioterapis" {{ old('formasi_jabatan')=='Fisioterapis' ? 'selected': '' }} >Fisioterapis</option>
-                                <option value="Refraksionis Optisien" {{ old('formasi_jabatan')=='Refraksionis Optisien' ? 'selected': '' }} >Refraksionis Optisien</option>
-                                <option value="Perekam Medis" {{ old('formasi_jabatan')=='Perekam Medis' ? 'selected': '' }} >Perekam Medis</option>
-                                <option value="Okupasi Terapis" {{ old('formasi_jabatan')=='Okupasi Terapis' ? 'selected': '' }} >Okupasi Terapis</option>
-                                <option value="Penata Anestesi" {{ old('formasi_jabatan')=='Penata Anestesi' ? 'selected': '' }} >Penata Anestesi</option>
-                                <option value="Asisten Penata Anestes" {{ old('formasi_jabatan')=='Asisten Penata Anestes' ? 'selected': '' }} >Asisten Penata Anestes</option>
-                                <option value="Psikolog Klinis" {{ old('formasi_jabatan')=='Psikolog Klinis' ? 'selected': '' }} >Psikolog Klinis</option>
-                                <option value="Tenaga Sanitasi Lingkungan" {{ old('formasi_jabatan')=='Tenaga Sanitasi Lingkungan' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan</option>
-                                <option value="Teknisi Elektromedis" {{ old('formasi_jabatan')=='Teknisi Elektromedis' ? 'selected': '' }} >Teknisi Elektromedis</option>
-                                <option value="Fisikawan Medis" {{ old('formasi_jabatan')=='Fisikawan Medis' ? 'selected': '' }} >Fisikawan Medis</option>
-                                <option value="Pembimbing Kesehatan Kerja" {{ old('formasi_jabatan')=='Pembimbing Kesehatan Kerja' ? 'selected': '' }} >Pembimbing Kesehatan Kerja</option>
-                                <option value="Teknisi Transfusi Darah" {{ old('formasi_jabatan')=='Teknisi Transfusi Darah' ? 'selected': '' }} >Teknisi Transfusi Darah</option>
-                                <option value="Terapis Wicara" {{ old('formasi_jabatan')=='Terapis Wicara' ? 'selected': '' }} >Terapis Wicara</option>
-                                <option value="Ortotis Prostetis" {{ old('formasi_jabatan')=='Ortotis Prostetis' ? 'selected': '' }} >Ortotis Prostetis</option>
+                                <option value="Dokter" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Dokter' ? 'selected': '' }} >Dokter</option>
+                                <option value="Perawat" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Perawat' ? 'selected': '' }} >Perawat</option>
+                                <option value="Terapis Gigi dan Mulut" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Terapis Gigi dan Mulut' ? 'selected': '' }} >Terapis Gigi dan Mulut</option>
+                                <option value="Bidan" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Bidan' ? 'selected': '' }} >Bidan</option>
+                                <option value="Administrator Kesehatan" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Administrator Kesehatan' ? 'selected': '' }} >Administrator Kesehatan</option>
+                                <option value="Apoteker" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Apoteker' ? 'selected': '' }} >Apoteker</option>
+                                <option value="Asisten Apoteker" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Asisten Apoteker' ? 'selected': '' }} >Asisten Apoteker</option>
+                                <option value="Nutrisionis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Nutrisionis' ? 'selected': '' }} >Nutrisionis</option>
+                                <option value="Radiografer" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Radiografer' ? 'selected': '' }} >Radiografer</option>
+                                <option value="Pranata Laboratorium Kesehatan" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Pranata Laboratorium Kesehatan' ? 'selected': '' }} >Pranata Laboratorium Kesehatan</option>
+                                <option value="Fisioterapis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Fisioterapis' ? 'selected': '' }} >Fisioterapis</option>
+                                <option value="Refraksionis Optisien" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Refraksionis Optisien' ? 'selected': '' }} >Refraksionis Optisien</option>
+                                <option value="Perekam Medis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Perekam Medis' ? 'selected': '' }} >Perekam Medis</option>
+                                <option value="Okupasi Terapis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Okupasi Terapis' ? 'selected': '' }} >Okupasi Terapis</option>
+                                <option value="Penata Anestesi" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Penata Anestesi' ? 'selected': '' }} >Penata Anestesi</option>
+                                <option value="Asisten Penata Anestes" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Asisten Penata Anestes' ? 'selected': '' }} >Asisten Penata Anestes</option>
+                                <option value="Psikolog Klinis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Psikolog Klinis' ? 'selected': '' }} >Psikolog Klinis</option>
+                                <option value="Tenaga Sanitasi Lingkungan" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Tenaga Sanitasi Lingkungan' ? 'selected': '' }} >Tenaga Sanitasi Lingkungan</option>
+                                <option value="Teknisi Elektromedis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Teknisi Elektromedis' ? 'selected': '' }} >Teknisi Elektromedis</option>
+                                <option value="Fisikawan Medis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Fisikawan Medis' ? 'selected': '' }} >Fisikawan Medis</option>
+                                <option value="Pembimbing Kesehatan Kerja" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Pembimbing Kesehatan Kerja' ? 'selected': '' }} >Pembimbing Kesehatan Kerja</option>
+                                <option value="Teknisi Transfusi Darah" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Teknisi Transfusi Darah' ? 'selected': '' }} >Teknisi Transfusi Darah</option>
+                                <option value="Terapis Wicara" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Terapis Wicara' ? 'selected': '' }} >Terapis Wicara</option>
+                                <option value="Ortotis Prostetis" {{ old('formasi_jabatan', request('formasi_jabatan'))=='Ortotis Prostetis' ? 'selected': '' }} >Ortotis Prostetis</option>
                             </select>
                             @error('formasi_jabatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -233,12 +233,12 @@
                         <div class="col-md-4 col-lg-3">
                             <select class="form-select" name="formasi_jabatan_tingkat" id="formasi_jabatan_tingkat">
                                 <option value="">-- Pilihan --</option>
-                                <option value="Ahli Madya" {{ old('formasi_jabatan_tingkat')=='Ahli Madya' ? 'selected': '' }} >Ahli Madya</option>
-                                <option value="Ahli Muda" {{ old('formasi_jabatan_tingkat')=='Ahli Muda' ? 'selected': '' }} >Ahli Muda</option>
-                                <option value="Ahli Pertama" {{ old('formasi_jabatan_tingkat')=='Ahli Pertama' ? 'selected': '' }} >Ahli Pertama</option>
-                                <option value="Penyelia" {{ old('formasi_jabatan_tingkat')=='Penyelia' ? 'selected': '' }} >Penyelia</option>
-                                <option value="Mahir" {{ old('formasi_jabatan_tingkat')=='Mahir' ? 'selected': '' }} >Mahir</option>
-                                <option value="Terampil" {{ old('formasi_jabatan_tingkat')=='Terampil' ? 'selected': '' }} >Terampil</option>
+                                <option value="Ahli Madya" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Ahli Madya' ? 'selected': '' }} >Ahli Madya</option>
+                                <option value="Ahli Muda" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Ahli Muda' ? 'selected': '' }} >Ahli Muda</option>
+                                <option value="Ahli Pertama" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Ahli Pertama' ? 'selected': '' }} >Ahli Pertama</option>
+                                <option value="Penyelia" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Penyelia' ? 'selected': '' }} >Penyelia</option>
+                                <option value="Mahir" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Mahir' ? 'selected': '' }} >Mahir</option>
+                                <option value="Terampil" {{ old('formasi_jabatan_tingkat', request('formasi_jabatan_tingkat'))=='Terampil' ? 'selected': '' }} >Terampil</option>
                             </select>
                             @error('formasi_jabatan_tingkat')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -247,9 +247,9 @@
                         <div class="col-md-4 col-lg-3">
                             <select class="form-select" name="formasi_jabatan_keterangan" id="formasi_jabatan_keterangan">
                                 <option value="">-- Pilihan --</option>
-                                <option value="Umum" {{ old('formasi_jabatan_keterangan')=='Umum' ? 'selected': '' }} >Umum</option>
-                                <option value="Spesialis" {{ old('formasi_jabatan_keterangan')=='Spesialis' ? 'selected': '' }} >Spesialis</option>
-                                <option value="Sub Spesialis" {{ old('formasi_jabatan_keterangan')=='Sub Spesialis' ? 'selected': '' }} >Sub Spesialis</option>
+                                <option value="Umum" {{ old('formasi_jabatan_keterangan', request('formasi_jabatan_keterangan'))=='Umum' ? 'selected': '' }} >Umum</option>
+                                <option value="Spesialis" {{ old('formasi_jabatan_keterangan', request('formasi_jabatan_keterangan'))=='Spesialis' ? 'selected': '' }} >Spesialis</option>
+                                <option value="Sub Spesialis" {{ old('formasi_jabatan_keterangan', request('formasi_jabatan_keterangan'))=='Sub Spesialis' ? 'selected': '' }} >Sub Spesialis</option>
                             </select>
                             @error('formasi_jabatan_keterangan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -263,11 +263,11 @@
                             <div class="col-md-6 col-lg-9">
                                 <select class="form-select" name="jenis_jabatan" id="jenis_jabatan">
                                     <option value="">-- Pilihan --</option>
-                                    <option value="Struktural" {{ old('jenis_jabatan')=='Struktural' ? 'selected': '' }} >Struktural</option>
-                                    <option value="Fungsional" {{ old('jenis_jabatan')=='Fungsional' ? 'selected': '' }} >Fungsional</option>
-                                    <option value="Fungsional Pelaksana" {{ old('jenis_jabatan')=='Fungsional Pelaksana' ? 'selected': '' }} >Fungsional Pelaksana</option>
-                                    <option value="Tenaga Ahli Daya" {{ old('jenis_jabatan')=='Tenaga Ahli Daya' ? 'selected': '' }} >Tenaga Ahli Daya</option>
-                                    <option value="Tenaga Mitra" {{ old('jenis_jabatan')=='Tenaga Mitra' ? 'selected': '' }} >Tenaga Mitra</option>
+                                    <option value="Struktural" {{ old('jenis_jabatan', request('jenis_jabatan'))=='Struktural' ? 'selected': '' }} >Struktural</option>
+                                    <option value="Fungsional" {{ old('jenis_jabatan', request('jenis_jabatan'))=='Fungsional' ? 'selected': '' }} >Fungsional</option>
+                                    <option value="Fungsional Pelaksana" {{ old('jenis_jabatan', request('jenis_jabatan'))=='Fungsional Pelaksana' ? 'selected': '' }} >Fungsional Pelaksana</option>
+                                    <option value="Tenaga Ahli Daya" {{ old('jenis_jabatan', request('jenis_jabatan'))=='Tenaga Ahli Daya' ? 'selected': '' }} >Tenaga Ahli Daya</option>
+                                    <option value="Tenaga Mitra" {{ old('jenis_jabatan', request('jenis_jabatan'))=='Tenaga Mitra' ? 'selected': '' }} >Tenaga Mitra</option>
                                 </select>
                             </div>
                             @error('jenis_jabatan')
@@ -356,12 +356,12 @@
                             <div class="col-md-6 col-lg-9">
                             <select class="form-select" name="jenis_kepegawaian" id="jenis_kepegawaian">
                                 <option value="">-- Pilihan --</option>
-                                <option value="PNS" {{ old('jenis_kepegawaian')=='PNS' ? 'selected': '' }} >PNS</option>
-                                <option value="PPPK" {{ old('jenis_kepegawaian')=='PPPK' ? 'selected': '' }} >PPPK</option>
-                                <option value="CPNS" {{ old('jenis_kepegawaian')=='CPNS' ? 'selected': '' }} >CPNS</option>
-                                <option value="BLUD" {{ old('jenis_kepegawaian')=='BLUD' ? 'selected': '' }} >BLUD</option>
-                                <option value="Mitra" {{ old('jenis_kepegawaian')=='Mitra' ? 'selected': '' }} >Mitra</option>
-                                <option value="Ahli Daya" {{ old('jenis_kepegawaian')=='Ahli Daya' ? 'selected': '' }} >Ahli Daya</option>
+                                <option value="PNS" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='PNS' ? 'selected': '' }} >PNS</option>
+                                <option value="PPPK" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='PPPK' ? 'selected': '' }} >PPPK</option>
+                                <option value="CPNS" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='CPNS' ? 'selected': '' }} >CPNS</option>
+                                <option value="BLUD" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='BLUD' ? 'selected': '' }} >BLUD</option>
+                                <option value="Mitra" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='Mitra' ? 'selected': '' }} >Mitra</option>
+                                <option value="Ahli Daya" {{ old('jenis_kepegawaian', request('jenis_kepegawaian'))=='Ahli Daya' ? 'selected': '' }} >Ahli Daya</option>
                             </select>
                             @error('jenis_kepegawaian')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -376,13 +376,13 @@
                             <div class="col-md-6 col-lg-9">
                             <select class="form-select" name="eselon" id="eselon">
                                 <option value="">-- Pilihan --</option>
-                                <option value="II.b" {{ old('eselon')=='II.b' ? 'selected': '' }} >II.b</option>
-                                <option value="III.a" {{ old('eselon')=='III.a' ? 'selected': '' }} >III.a</option>
-                                <option value="III.b" {{ old('eselon')=='III.b' ? 'selected': '' }} >III.b</option>
-                                <option value="IV.a" {{ old('eselon')=='IV.a' ? 'selected': '' }} >IV.a</option>
-                                <option value="IV.b" {{ old('eselon')=='IV.b' ? 'selected': '' }} >IV.b</option>
-                                <option value="Kepala Instalasi" {{ old('eselon')=='Kepala Instalasi' ? 'selected': '' }} >Kepala Instalasi</option>
-                                <option value="Kepala Ruang" {{ old('eselon')=='Kepala Ruang' ? 'selected': '' }} >Kepala Ruang</option>
+                                <option value="II.b" {{ old('eselon', request('eselon'))=='II.b' ? 'selected': '' }} >II.b</option>
+                                <option value="III.a" {{ old('eselon', request('eselon'))=='III.a' ? 'selected': '' }} >III.a</option>
+                                <option value="III.b" {{ old('eselon', request('eselon'))=='III.b' ? 'selected': '' }} >III.b</option>
+                                <option value="IV.a" {{ old('eselon', request('eselon'))=='IV.a' ? 'selected': '' }} >IV.a</option>
+                                <option value="IV.b" {{ old('eselon', request('eselon'))=='IV.b' ? 'selected': '' }} >IV.b</option>
+                                <option value="Kepala Instalasi" {{ old('eselon', request('eselon'))=='Kepala Instalasi' ? 'selected': '' }} >Kepala Instalasi</option>
+                                <option value="Kepala Ruang" {{ old('eselon', request('eselon'))=='Kepala Ruang' ? 'selected': '' }} >Kepala Ruang</option>
                             </select>
                             </div>
                         </div>
@@ -451,18 +451,18 @@
                             <div class="col-md-6 col-lg-9">
                             <select class="form-select" name="status" id="status">
                                 <option value="">-- Pilihan --</option>
-                                <option value="Aktif" {{ old('status')=='Aktif' ? 'selected': '' }} >Aktif</option>
-                                <option value="CLTN" {{ old('status')=='CLTN' ? 'selected': '' }} >CLTN</option>
-                                <option value="Tugas Belajar" {{ old('status')=='Tugas Belajar' ? 'selected': '' }} >Tugas Belajar</option>
-                                <option value="Pemberhentian sementara" {{ old('status')=='Pemberhentian sementara' ? 'selected': '' }} >Pemberhentian sementara</option>
-                                <option value="Penerima Uang Tunggu" {{ old('status')=='Penerima Uang Tunggu' ? 'selected': '' }} >Penerima Uang Tunggu</option>
-                                <option value="Wajib Militer" {{ old('status')=='Wajib Militer' ? 'selected': '' }} >Wajib Militer</option>
-                                <option value="Pejabat Negara" {{ old('status')=='Pejabat Negara' ? 'selected': '' }} >Pejabat Negara</option>
-                                <option value="Proses Banding BAPEK" {{ old('status')=='Proses Banding BAPEK' ? 'selected': '' }} >Proses Banding BAPEK</option>
-                                <option value="Masa Persiapan Pensiun" {{ old('status')=='Masa Persiapan Pensiun' ? 'selected': '' }} >Masa Persiapan Pensiun</option>
-                                <option value="Pensiun" {{ old('status')=='Pensiun' ? 'selected': '' }} >Pensiun</option>
-                                <option value="Calon CPNS" {{ old('status')=='Calon CPNS' ? 'selected': '' }} >Calon CPNS</option>
-                                <option value="Hukuman Disiplin" {{ old('status')=='Hukuman Disiplin' ? 'selected': '' }} >Hukuman Disiplin</option>
+                                <option value="Aktif" {{ old('status', request('status'))=='Aktif' ? 'selected': '' }} >Aktif</option>
+                                <option value="CLTN" {{ old('status', request('status'))=='CLTN' ? 'selected': '' }} >CLTN</option>
+                                <option value="Tugas Belajar" {{ old('status', request('status'))=='Tugas Belajar' ? 'selected': '' }} >Tugas Belajar</option>
+                                <option value="Pemberhentian sementara" {{ old('status', request('status'))=='Pemberhentian sementara' ? 'selected': '' }} >Pemberhentian sementara</option>
+                                <option value="Penerima Uang Tunggu" {{ old('status', request('status'))=='Penerima Uang Tunggu' ? 'selected': '' }} >Penerima Uang Tunggu</option>
+                                <option value="Wajib Militer" {{ old('status', request('status'))=='Wajib Militer' ? 'selected': '' }} >Wajib Militer</option>
+                                <option value="Pejabat Negara" {{ old('status', request('status'))=='Pejabat Negara' ? 'selected': '' }} >Pejabat Negara</option>
+                                <option value="Proses Banding BAPEK" {{ old('status', request('status'))=='Proses Banding BAPEK' ? 'selected': '' }} >Proses Banding BAPEK</option>
+                                <option value="Masa Persiapan Pensiun" {{ old('status', request('status'))=='Masa Persiapan Pensiun' ? 'selected': '' }} >Masa Persiapan Pensiun</option>
+                                <option value="Pensiun" {{ old('status', request('status'))=='Pensiun' ? 'selected': '' }} >Pensiun</option>
+                                <option value="Calon CPNS" {{ old('status', request('status'))=='Calon CPNS' ? 'selected': '' }} >Calon CPNS</option>
+                                <option value="Hukuman Disiplin" {{ old('status', request('status'))=='Hukuman Disiplin' ? 'selected': '' }} >Hukuman Disiplin</option>
                             </select>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
