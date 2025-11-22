@@ -19,18 +19,18 @@
         <table class="table table-striped table-bordered table-sm">
             <thead>
                 <tr class="text-center align-middle">
-                    <th>No</th>
+                    <th style="width: 50px;">No</th>
                     <th>NIP</th>
                     <th>Nama</th>
                     <th>Jenis Kelamin<br>Tempat Tanggal Lahir</th>
                     <th>Golongan<br>Jenis Kepegawaian</th>
-                    <th>Action</th>
+                    <th style="width: 100px;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($pegawais as $pegawai)
+                @forelse ($pegawais as $index => $pegawai)
                 <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $pegawais->firstItem() + $index }}</td>
                     <td>{{ $pegawai->nip }}</td>
                     <td>{{ $pegawai->gelar_depan }}{{ $pegawai->nama }}, {{ $pegawai->gelar_belakang }}</td>
                     <td>{{ $pegawai->jenis_kelamin }}<br>{{ $pegawai->tempat_lahir }}<br>{{ $pegawai->tanggal_lahir }}</td>
@@ -43,7 +43,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">Tidak ada pegawai ditemukan</td>
+                    <td colspan="6" class="text-center">Tidak ada pegawai ditemukan</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -145,7 +145,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lama_hari" class="form-label">Lama Cuti (hari)</label>
-                                        <input type="number" class="form-control @error('lama_hari') is-invalid @enderror" id="lama_hari" name="lama_hari" min="1" readonly required>
+                                        <input type="number" class="form-control @error('lama_hari') is-invalid @enderror" id="lama_hari" name="lama_hari" min="1" required>
                                         @error('lama_hari')
                                         <div class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
@@ -190,12 +190,6 @@
                                             <option value="{{ $atasan->id }}" data-nip="{{ $atasan->nip }}">{{ $atasan->gelar_depan }}. {{ $atasan->nama }}, {{ $atasan->gelar_belakang }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="atasan_jabatan" class="form-label">Jabatan Atasan</label>
-                                        <input type="text" class="form-control" name="atasan_jabatan" id="atasan_jabatan" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

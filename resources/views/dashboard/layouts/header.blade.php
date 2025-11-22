@@ -1,6 +1,6 @@
-<div class="d-flex align-items-center justify-content-between py-2">
+<div class="d-flex align-items-center justify-content-between">
     <a href="{{ route('dashboard') }}" class="d-flex align-items-center text-decoration-none">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="" style="height: 40px;">
+        <img src="{{ asset('assets/img/logo.png') }}" alt="RSUD Dr. Soeselo" style="height: 40px;">
         <div class="d-none fw-bold d-lg-flex flex-column ms-2">
             <span style="line-height: 1.2;">Sistem Informasi</span>
             <span style="line-height: 1.2;">Kepegawaian</span>
@@ -60,16 +60,16 @@
                                 $isKgb = strtoupper($jenis) === 'KGB';
                                 $isPangkat = strtoupper($jenis) === 'PANGKAT';
 
-                                $badgeClass = $isKgb ? 'bg-info' : ($isPangkat ? 'bg-success' : 'bg-secondary');
-                                $iconClass  = $isKgb ? 'fa-arrow-up' : ($isPangkat ? 'fa-user' : 'fa-info');
+                                // $badgeClass = $isKgb ? 'bg-info' : ($isPangkat ? 'bg-success' : 'bg-secondary');
+                                // $iconClass  = $isKgb ? 'fa-arrow-up' : ($isPangkat ? 'fa-user' : 'fa-info');
                             @endphp
 
                             <li class="list-group-item notification-item d-flex align-items-start border-0 border-bottom">
-                                <span class="me-3 mt-2">
+                                {{-- <span class="me-3 mt-2">
                                     <span class="badge {{ $badgeClass }} p-3 fs-5 shadow-sm" title="{{ $jenis }}">
                                         <i class="fa {{ $iconClass }}"></i>
                                     </span>
-                                </span>
+                                </span> --}}
 
                                 <div class="flex-grow-1">
                                     <div class="fw-semibold mb-1">{{ $notifikasi['nama'] ?? '-' }}</div>
