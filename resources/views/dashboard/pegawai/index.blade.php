@@ -114,7 +114,7 @@
                                     <td>{{ $pegawai->jabatan->nama_jabatan ?? '-' }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                        <a href="{{ route('pegawai.show',['pegawai' => $pegawai->id]) }}" class="btn btn-success btn-sm" title="Detial"><i class="bi bi-eye"></i></a>
+                                        <a href="{{ route('pegawai.show',['pegawai' => $pegawai->id]) }}" class="btn btn-success btn-sm" title="Detail"><i class="bi bi-eye"></i></a>
                                         <a href="{{ route('pegawai.edit',['pegawai' => $pegawai->id]) }}" class="btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                         <button type="button" class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal" data-bs-target="#exampleModal{{$pegawai->id}}">
                                             <i class="bi bi-x-circle"></i>
